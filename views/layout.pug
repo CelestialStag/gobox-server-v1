@@ -2,24 +2,29 @@ mixin withGo
 	Generating Go html/template output.
 
 doctype html
-html(class='diag-bg')
+html
 	head
 		title= .title
 		
 		// local assets
 		script(type='text/javascript', src='/static/js/jquery.js')
 		script(type='text/javascript', src='/static/js/drag_drop_upload.js')
+		script(type='text/javascript', src='/static/js/download.js')
 		
 		link(rel='stylesheet', type='text/css', href='/static/css/style.css')
 		link(rel='shortcut icon', type='x-icon' href='/static/favicon.ico')
 
 		// ashleycss
-		//link(rel='stylesheet', type='text/css', href='https://unpkg.com/ashleycss')
+		link(rel='stylesheet', type='text/css', href='https://unpkg.com/ashleycss')
 		
 		// Font Awesome
 		link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.4.1/css/all.css',
 			integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz", crossorigin="anonymous")
 
-	body
-		div(class="container")
-			block content
+	body(class='orange-tint')
+
+		div(class='nav-container')
+			a(class='nav-logo', href='/') gopy
+			a(class='nav-object', href='/auth') login
+
+		block content
