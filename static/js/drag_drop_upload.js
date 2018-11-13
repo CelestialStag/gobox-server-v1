@@ -1,23 +1,60 @@
 $("document").ready(function(){
 
-	$("body").on('dragenter', (e) => {
-		e.preventDefault();
-        e.stopPropagation();
-	});
-
-	$("body").on('dragleave', (e) => {
-		e.preventDefault();
-        e.stopPropagation();
-	});
-
-	$("body").on('dragover', (e) => {
-		e.preventDefault();
-        e.stopPropagation();
-	});
-
-	$("html").on('drop', (e) => {
+	$("screen").on('dragenter', (e) => {
 		e.preventDefault();
 		e.stopPropagation();
+		
+		$(e.target).addClass("active");
+	});
+	
+	$("screen").on('dragover', (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		
+		$(e.target).addClass("active");
+	});
+	
+	$("screen").on('dragleave', (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+
+		$(e.target).removeClass("active");
+	});
+
+	$("screen").on('drop', (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		
+		$(e.target).addClass("active");
+	});
+
+	$("body").on('dragenter', (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		
+		$(".screen").addClass("active");
+	});
+	
+	$("body").on('dragover', (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		
+		$(".screen").addClass("active");
+	});
+	
+	$("body").on('dragleave', (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+
+		$(e.target).removeClass("active");
+	});
+
+	$("body").on('drop', (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+
+		$(".screen").removeClass("active");
+
 		let dt = e.originalEvent.dataTransfer
 		let files = dt.files
 
@@ -25,7 +62,7 @@ $("document").ready(function(){
 		
 		$.each(files, (i, f) => {
 			
-			let url = 'http://localhost:8080/api/v1/file/upload'
+			let url = '/api/v1/file/upload'
 			let formData = new FormData()
 
 			formData.append('uploadfile', f)
