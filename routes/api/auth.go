@@ -11,6 +11,6 @@ type AUTHController struct{}
 func (c *AUTHController) Get() mvc.Result {
 	return mvc.Response{
 		ContentType: "text/html",
-		Text:        "<h1>Welcome to /v1/file</h1>",
+		Text:        "<h1>Welcome to /auth </h1>",
 	}
 }

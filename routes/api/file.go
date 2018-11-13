@@ -9,10 +9,30 @@ import (
 	"time"
 
 	"github.com/kataras/iris"
+	"github.com/kataras/iris/mvc"
 )
 
 // FILEController The controller for /api
 type FILEController struct{}
+
+func (c *FILEController) BeforeActivation(b mvc.BeforeActivation) {
+	downloadMiddleware := func(ctx iris.Context) {
+		ctx.Application().Logger().Warnf("Inside /REadME")
+
+		file := ctx.Params().GetString("id")
+		dir := "./data/" + file
+		ctx.SendFile(dir, file)
+	}
+
+	b.Handle("GET", "/download/{id:string}", "Download", downloadMiddleware)
+}
+
+// CustomHandlerWithoutFollowingTheNamingGuide serves
+// Method:   GET
+// Resource: http://localhost:8080/custom_path
+func (c *FILEController) Download(id string) string {
+	return ""
+}
 
 // GetUpload The controller for /api
 func (c *FILEController) GetUpload(ctx iris.Context) {
