@@ -3,6 +3,7 @@ package main
 import (
 	"gopy/routes"
 	"gopy/routes/api"
+	"gopy/routes/root"
 
 	"github.com/kataras/iris"
 
@@ -38,11 +39,21 @@ func initialize() *iris.Application {
 	//
 	//////////////////////////////////////////////////////////////////
 
+	app.OnErrorCode(iris.StatusNotFound, func(ctx iris.Context) {
+		ctx.ViewData("message", "reource could not be found!")
+		ctx.ViewData("error", "ERROR 404")
+		ctx.View("error/404.pug")
+	})
+
 	mvc.Configure(app.Party("/"), func(app *mvc.Application) {
-	}).Handle(new(routes.INDEXController))
+
+		app.Party("/file/").Handle(new(root.FILEController))
+		app.Party("/auth").Handle(new(api.AUTHController))
+	}).Handle(new(routes.ROOTController))
 
 	mvc.Configure(app.Party("/api/v1"), func(app *mvc.Application) {
 
+		//app.Party("/file").Handle(new(api.FILEController))
 		app.Party("/file").Handle(new(api.FILEController))
 		app.Party("/auth").Handle(new(api.AUTHController))
 	}).Handle(new(routes.APIController))
