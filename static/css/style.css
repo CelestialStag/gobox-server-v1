@@ -1,3 +1,39 @@
-.high {
-	background-color: black;
+html, body, mast {
+	position: relative;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+
+	background-color: #ffb7c5;
+	/* ffe0c0 */
+	position: relative;
+	min-height: 100% !important;
+}
+
+.screen {
+	filter: blur(0px);
+
+	visibility: hidden;
+	display: none;
+
+	position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+	background:rgba(0, 0, 0, 0.6);
+}
+
+.active {
+	visibility: visible;
+	display: initial;
 }
