@@ -11,7 +11,7 @@ type FILEController struct {
 
 func (c *FILEController) BeforeActivation(b mvc.BeforeActivation) {
 	downloadMiddleware := func(ctx iris.Context) {
-		ctx.Application().Logger().Warnf("Inside /custom_path")
+		ctx.Application().Logger().Warnf("Inside /id")
 		ctx.ViewData("id", ctx.Params().Get("id"))
 		ctx.View("download.pug")
 	}

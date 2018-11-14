@@ -2,9 +2,13 @@ package api
 
 import (
 	"crypto/md5"
+	"crypto/rand"
 	"fmt"
 	"io"
+	"mime/multipart"
 	"os"
+	"path/filepath"
+	"sort"
 	"strconv"
 	"time"
 
@@ -19,20 +23,49 @@ func (c *FILEController) BeforeActivation(b mvc.BeforeActivation) {
 	downloadMiddleware := func(ctx iris.Context) {
 		ctx.Application().Logger().Warnf("Inside /REadME")
 
-		file := ctx.Params().GetString("id")
-		dir := "./data/" + file
+		id := ctx.Params().GetString("id")
+		file := ctx.Params().GetString("file")
+
+		dir := "./data/" + id + "/" + file
 		ctx.SendFile(dir, file)
 	}
 
-	b.Handle("GET", "/download/{id:string}", "Download", downloadMiddleware)
+	listMiddleware := func(ctx iris.Context) {
+
+		ls := make(map[int]string)
+		var ls2 = make([]string, 0)
+
+		folder := ctx.Params().GetString("id")
+		dir := "./data/" + folder
+
+		f, err := os.Open(dir)
+		if err != nil {
+		}
+
+		list, err := f.Readdir(-1)
+		f.Close()
+
+		sort.Slice(list, func(i, j int) bool { return list[i].Name() < list[j].Name() })
+
+		for i, file := range list {
+			ls2 = append(ls2, file.Name())
+			ls[i] = file.Name()
+		}
+
+		ctx.JSON(ls2) // or myjsonStruct{hello:"json}
+	}
+
+	b.Handle("GET", "/download/{id:string}/{file:string}", "Download", downloadMiddleware)
+	b.Handle("GET", "/list/{id:string}", "List", listMiddleware)
 }
 
 // CustomHandlerWithoutFollowingTheNamingGuide serves
 // Method:   GET
 // Resource: http://localhost:8080/custom_path
-func (c *FILEController) Download(id string) string {
-	return ""
-}
+func (c *FILEController) Download(id string) {}
+
+// PostUpload The controller for /api
+func (c *FILEController) List(ctx iris.Context) {}
 
 // GetUpload The controller for /api
 func (c *FILEController) GetUpload(ctx iris.Context) {
@@ -65,31 +98,54 @@ func (c *FILEController) GetUpload(ctx iris.Context) {
 // 	ctx.UploadFormFiles("./uploads", beforeSave)
 // }
 
+type UploadResponce struct {
+	File string `json:"file"`
+	URL  string `json:"url"`
+}
+
 // PostUpload The controller for /api
 func (c *FILEController) PostUpload(ctx iris.Context) {
-	fmt.Print(ctx)
-	// Get the file from the request.
-	file, info, err := ctx.FormFile("uploadfile")
-	if err != nil {
-		ctx.StatusCode(iris.StatusInternalServerError)
-		ctx.HTML("Error while uploading: <b>" + err.Error() + "</b>")
-		return
+
+	g, nil := GenerateRandomBytes(4)
+	token := fmt.Sprintf("%x", g)
+	dir := "./data/" + token
+
+	if _, err := os.Stat(dir); os.IsNotExist(err) {
+		err = os.MkdirAll(dir, 0755)
+		if err != nil {
+			panic(err)
+		}
 	}
 
-	defer file.Close()
-	fname := info.Filename
+	ctx.UploadFormFiles(dir)
+	ctx.JSON(map[string]string{"url": dir, "hash": token}) // or myjsonStruct{hello:"json}
+}
 
-	// Create a file with the same name
-	// assuming that you have a folder named 'uploads'
-	out, err := os.OpenFile("./data/"+fname,
-		os.O_WRONLY|os.O_CREATE, 0666)
+func saveUploadedFile(fh *multipart.FileHeader, destDirectory string) (int64, error) {
+	src, err := fh.Open()
+	if err != nil {
+		return 0, err
+	}
+	defer src.Close()
+
+	out, err := os.OpenFile(filepath.Join(destDirectory, fh.Filename),
+		os.O_WRONLY|os.O_CREATE, os.FileMode(0666))
 
 	if err != nil {
-		ctx.StatusCode(iris.StatusInternalServerError)
-		ctx.HTML("Error while uploading: <b>" + err.Error() + "</b>")
-		return
+		return 0, err
 	}
 	defer out.Close()
 
-	io.Copy(out, file)
+	return io.Copy(out, src)
+}
+
+func GenerateRandomBytes(n int) ([]byte, error) {
+	b := make([]byte, n)
+	_, err := rand.Read(b)
+	// Note that err == nil only if we read len(b) bytes.
+	if err != nil {
+		return nil, err
+	}
+
+	return b, nil
 }

@@ -52,27 +52,38 @@ $("document").ready(function(){
 	$("body").on('drop', (e) => {
 		e.preventDefault();
 		e.stopPropagation();
-
-		$(".screen").removeClass("active");
-
-		let dt = e.originalEvent.dataTransfer
-		let files = dt.files
-
-		console.log(files);
 		
-		$.each(files, (i, f) => {
-			
-			let url = '/api/v1/file/upload'
-			let formData = new FormData()
+		$(".screen").removeClass("active");
+		
+		$form = $("#form")
+		$input = $("#form input[type='file'")
+		let droppedFiles = e.originalEvent.dataTransfer.files
+		
+		let url = '/api/v1/file/upload'
+		
+		var ajaxData = new FormData($form.get(0));
+		
+		$.each( droppedFiles, function(i, file) {
+			ajaxData.append( $input.attr('name'), file );
+		});
 
-			formData.append('uploadfile', f)
-			
-			console.log(formData)
-
-			fetch(url, {
-				method: 'POST',
-				body: formData
-			})
-		})
+		$.ajax({
+			url: $form.attr('action'),
+			type: $form.attr('method'),
+			data: ajaxData,
+			dataType: 'json',
+			cache: false,
+			contentType: false,
+			processData: false,
+			complete: function(d) {
+				json = JSON.parse(d.responseText)
+				$.each(json, (i, v) => {
+				});
+				$('#link').html('<a href='+'/file/'+json.hash+'>u.sawol.moe/file/'+json.hash+'</a>')
+				console.log(d.responseText);
+				
+				$form.removeClass('is-uploading');
+			}
+		});
 	});
 });

@@ -1,10 +1,18 @@
 extends views/layout.pug
 
 block content
-
+	
 	div(class='screen')
 
-	div(class='mast center')
+	div(class='mast center container')
 		h1= .title
 		p.
 			Drag and drop to upload.
+
+		pre
+			code(id='link') Your file link
+		
+		form(id='form', action="/api/v1/file/upload", enctype="multipart/form-data", method="POST")
+			input(type="file", name="files[]", multiple)
+			input(type="hidden", name="token", value=.token)
+			button(type="submit", value="upload") upload
