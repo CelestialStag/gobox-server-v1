@@ -64,7 +64,7 @@ func initialize() *iris.Application {
 func main() {
 	app := initialize()
 
-	app.Run(iris.Addr(":8080"),
+	app.Run(iris.Addr(":4040"),
 		iris.WithPostMaxMemory(32<<20),
 		iris.WithoutServerError(iris.ErrServerClosed))
 }
