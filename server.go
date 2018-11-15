@@ -45,7 +45,7 @@ func initialize() *iris.Application {
 
 	mvc.Configure(app.Party("/"), func(app *mvc.Application) {
 
-		app.Party("/f/").Handle(new(root.FILEController))
+		app.Party("/f").Handle(new(root.FILEController))
 		app.Party("/a").Handle(new(api.AUTHController))
 	}).Handle(new(routes.ROOTController))
 
