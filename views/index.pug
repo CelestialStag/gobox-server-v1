@@ -8,7 +8,7 @@ block content
 	form(id='form', action="/api/v1/f/upload", enctype="multipart/form-data", method="POST")
 
 		label(class='file-input outline')
-			input(type="file", name="file") select files
+			input(type="file", name="file") select file
 		input(type="hidden", name="token", value=.token)
 		input(type="submit", class='outline', id='submit', value='upload')
 	br
