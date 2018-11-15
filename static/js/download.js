@@ -15,6 +15,11 @@ $("document").ready(function(){
 			$('#uploaded').html(json.uploaded)
 			$('#type').html(json.type)
 			$('#download').attr('value', json.url)
+
+			if(json.type.includes("jpeg") || json.type.includes("png") || json.type.includes("gif") || json.type.includes("webp")){
+				// http://localhost:4040/api/v1/f/download/1015869f/PLQ2uBL.jpg example
+				$('#preview').attr('src', 'http://localhost:4040/api/v1/f/download/'+json.url)
+			}
 		}
 	});
 

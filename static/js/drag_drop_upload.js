@@ -95,6 +95,17 @@ $("document").ready(function(){
 		//$("#form").ajaxSubmit({url: url, type: 'POST'})
 	});
 
+
+	$("#link-c").on('click', (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		
+		let element = document.getElementById("link")
+		element.select();
+		document.execCommand("copy");
+	});
+
+
 	function sendFile($form, ajaxData){
 		$.ajax({
 			url: $form.attr('action'),
@@ -108,7 +119,7 @@ $("document").ready(function(){
 				json = JSON.parse(d.responseText)
 				$.each(json, (i, v) => {
 				});
-				$('#link').html('<a href='+'/f/'+json.hash+'>u.sawol.moe/file/'+json.hash+'</a>')
+				$('#link').attr('value', 'u.sawol.moe/f/'+json.hash)
 				console.log(d.responseText);
 				
 				$form.removeClass('is-uploading');

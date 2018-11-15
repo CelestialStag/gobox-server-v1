@@ -2,7 +2,6 @@ extends views/layout.pug
 
 block content
 	
-	=.title
 	p.
 		Drag and drop to upload.
 
@@ -14,8 +13,10 @@ block content
 		input(type="submit", class='outline', id='submit', value='upload')
 	br
 	
-	a(id='copy', href='javascript:void(0)')
-		code(id='link') Your file link will appear here
-		i(class='far fa-lg fa-copy')
+	//a(id='copy', href='javascript:void(0)')
+	div( id="link-c")
+		input(type="text", id="link", value='Your file link will appear here', style='border: none;', class='text-center grey-light cerulean-text', readonly)
+		button(value='Copy orange') Copy
+		
 
 	div(class='screen')
