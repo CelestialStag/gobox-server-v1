@@ -6,7 +6,19 @@ block content
 	
 	div(class='screen')
 
-	div(class='mast center')
-		h1(id='title', value=.id)= .id
-
-		ul(id='files')
+	div(class='center text-left')
+		div(id='id', style='width: 70%', value=.id)
+			h1(id='name')
+			div(class='row')
+				div(class='col')
+					label(for='size') file size:
+					code(id='size') ds
+					label(for='type') file type:
+					code(id='type') ds
+			div(class='row')
+				div(class='col')
+					label(for='uploaded') uploaded:
+					code(id='uploaded') ds
+					label(for='expires') expires:
+					code(id='expires') ds
+			button(id='download', type="button", class='outline', value="Download") Download

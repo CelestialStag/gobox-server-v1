@@ -59,7 +59,7 @@ $("document").ready(function(){
 		$input = $("#form input[type='file'")
 		let droppedFiles = e.originalEvent.dataTransfer.files
 		
-		let url = '/api/v1/file/upload'
+		let url = '/api/v1/f/upload'
 		
 		var ajaxData = new FormData($form.get(0));
 		
@@ -67,6 +67,35 @@ $("document").ready(function(){
 			ajaxData.append( $input.attr('name'), file );
 		});
 
+		sendFile($form, ajaxData)
+	});
+
+	$("#submit").on('click', (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+
+		$form = $("#form")
+		var ajaxData = new FormData($form.get(0));
+
+		let url = '/api/v1/f/upload'
+
+		$.ajax({
+			url: url,
+			type: 'post',
+			dataType: 'json',
+			cache: false,
+			contentType: false,
+			processData: false,
+			data: ajaxData,
+			success: (data) => {
+				console.log(data);
+				
+			}
+		});
+		//$("#form").ajaxSubmit({url: url, type: 'POST'})
+	});
+
+	function sendFile($form, ajaxData){
 		$.ajax({
 			url: $form.attr('action'),
 			type: $form.attr('method'),
@@ -79,11 +108,11 @@ $("document").ready(function(){
 				json = JSON.parse(d.responseText)
 				$.each(json, (i, v) => {
 				});
-				$('#link').html('<a href='+'/file/'+json.hash+'>u.sawol.moe/file/'+json.hash+'</a>')
+				$('#link').html('<a href='+'/f/'+json.hash+'>u.sawol.moe/file/'+json.hash+'</a>')
 				console.log(d.responseText);
 				
 				$form.removeClass('is-uploading');
 			}
 		});
-	});
+	}
 });

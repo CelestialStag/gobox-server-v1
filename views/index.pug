@@ -2,17 +2,20 @@ extends views/layout.pug
 
 block content
 	
+	=.title
+	p.
+		Drag and drop to upload.
+
+	form(id='form', action="/api/v1/f/upload", enctype="multipart/form-data", method="POST")
+
+		label(class='file-input outline')
+			input(type="file", name="file") select files
+		input(type="hidden", name="token", value=.token)
+		input(type="submit", class='outline', id='submit', value='upload')
+	br
+	
+	a(id='copy', href='javascript:void(0)')
+		code(id='link') Your file link will appear here
+		i(class='far fa-lg fa-copy')
+
 	div(class='screen')
-
-	div(class='mast center container')
-		h1= .title
-		p.
-			Drag and drop to upload.
-
-		pre
-			code(id='link') Your file link
-		
-		form(id='form', action="/api/v1/file/upload", enctype="multipart/form-data", method="POST")
-			input(type="file", name="files[]", multiple)
-			input(type="hidden", name="token", value=.token)
-			button(type="submit", value="upload") upload
