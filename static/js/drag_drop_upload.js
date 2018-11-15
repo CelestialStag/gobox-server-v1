@@ -79,20 +79,7 @@ $("document").ready(function(){
 
 		let url = '/api/v1/f/upload'
 
-		$.ajax({
-			url: url,
-			type: 'post',
-			dataType: 'json',
-			cache: false,
-			contentType: false,
-			processData: false,
-			data: ajaxData,
-			success: (data) => {
-				console.log(data);
-				
-			}
-		});
-		//$("#form").ajaxSubmit({url: url, type: 'POST'})
+		sendFile($form, ajaxData)
 	});
 
 
@@ -117,12 +104,10 @@ $("document").ready(function(){
 			processData: false,
 			complete: function(d) {
 				json = JSON.parse(d.responseText)
-				$.each(json, (i, v) => {
-				});
+
 				$('#link').attr('value', 'u.sawol.moe/f/'+json.hash)
+
 				console.log(d.responseText);
-				
-				$form.removeClass('is-uploading');
 			}
 		});
 	}
