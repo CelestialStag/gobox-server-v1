@@ -1,22 +1,18 @@
 package api
 
 import (
-	"crypto/md5"
 	"crypto/rand"
 	"fmt"
 	"io"
-	"mime/multipart"
+	"io/ioutil"
 	"os"
-	"path/filepath"
-	"sort"
-	"strconv"
-	"time"
 
+	"github.com/h2non/filetype"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/mvc"
 )
 
-// FILEController The controller for /api
+// FILEController The controller for /a/f
 type FILEController struct{}
 
 func (c *FILEController) BeforeActivation(b mvc.BeforeActivation) {
@@ -32,8 +28,7 @@ func (c *FILEController) BeforeActivation(b mvc.BeforeActivation) {
 
 	listMiddleware := func(ctx iris.Context) {
 
-		ls := make(map[int]string)
-		var ls2 = make([]string, 0)
+		json := make(map[string]string) // return json
 
 		folder := ctx.Params().GetString("id")
 		dir := "./data/" + folder
@@ -45,100 +40,83 @@ func (c *FILEController) BeforeActivation(b mvc.BeforeActivation) {
 		list, err := f.Readdir(-1)
 		f.Close()
 
-		sort.Slice(list, func(i, j int) bool { return list[i].Name() < list[j].Name() })
+		file := dir + "/" + list[0].Name()
+		url := folder + "/" + list[0].Name()
 
-		for i, file := range list {
-			ls2 = append(ls2, file.Name())
-			ls[i] = file.Name()
+		buf, _ := ioutil.ReadFile(file)
+		kind, unknown := filetype.Match(buf)
+		if unknown != nil {
+			fmt.Printf("Unknown: %s", unknown)
 		}
 
-		ctx.JSON(ls2) // or myjsonStruct{hello:"json}
+		json["name"] = list[0].Name()
+		json["size"] = fmt.Sprintf("%.0f", float64(list[0].Size())) // fmt.Sprintf("%.2f", float64(list[0].Size())/1e+6)
+		json["type"] = kind.MIME.Value
+		json["url"] = url
+		json["id"] = folder
+		json["uploaded"] = "n/a"
+		json["expires"] = "n/a"
+
+		ctx.JSON(json)
 	}
 
 	b.Handle("GET", "/download/{id:string}/{file:string}", "Download", downloadMiddleware)
-	b.Handle("GET", "/list/{id:string}", "List", listMiddleware)
+	b.Handle("GET", "/info/{id:string}", "Info", listMiddleware)
 }
 
-// CustomHandlerWithoutFollowingTheNamingGuide serves
-// Method:   GET
-// Resource: http://localhost:8080/custom_path
+// Download the controller for /f/download
 func (c *FILEController) Download(id string) {}
 
-// PostUpload The controller for /api
-func (c *FILEController) List(ctx iris.Context) {}
+// Info The controller for /f/info
+func (c *FILEController) Info(ctx iris.Context) {}
 
-// GetUpload The controller for /api
-func (c *FILEController) GetUpload(ctx iris.Context) {
-	// create a token (optionally).
-
-	now := time.Now().Unix()
-	h := md5.New()
-	io.WriteString(h, strconv.FormatInt(now, 10))
-	token := fmt.Sprintf("%x", h.Sum(nil))
-
-	// render the form with the token for any use you'd like.
-	// ctx.ViewData("", token)
-	// or add second argument to the `View` method.
-	// Token will be passed as {{.}} in the template.
-	ctx.ViewData("pageTitle", "My Upload Page")
-	ctx.ViewData("token", token)
-	ctx.View("upload.pug")
-}
-
-// func (c *FILEController) PostUpload(ctx iris.Context) {
-// 	//
-// 	// UploadFormFiles
-// 	// uploads any number of incoming files ("multiple" property on the form input).
-// 	//
-
-// 	// second argument is totally optionally,
-// 	// it can be used to change a file's name based on the request,
-// 	// at this example we will showcase how to use it
-// 	// by prefixing the uploaded file with the current user's ip.
-// 	ctx.UploadFormFiles("./uploads", beforeSave)
-// }
-
-type UploadResponce struct {
-	File string `json:"file"`
-	URL  string `json:"url"`
-}
-
-// PostUpload The controller for /api
+// PostUpload The controller for /f/upload
 func (c *FILEController) PostUpload(ctx iris.Context) {
 
+	// Generate random hash for dir
 	g, nil := GenerateRandomBytes(4)
 	token := fmt.Sprintf("%x", g)
 	dir := "./data/" + token
 
+	// Get the file from the request.
+	file, info, err := ctx.FormFile("file")
+	if err != nil {
+		ctx.StatusCode(iris.StatusInternalServerError)
+		ctx.JSON("{ error:" + err.Error() + "}")
+		return
+	}
+	defer file.Close()
+	fname := info.Filename
+
+	// Create the directory
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
 		err = os.MkdirAll(dir, 0755)
 		if err != nil {
-			panic(err)
+			ctx.StatusCode(iris.StatusInternalServerError)
+			ctx.JSON("{ error:" + err.Error() + "}")
+			return
 		}
 	}
 
-	ctx.UploadFormFiles(dir)
-	ctx.JSON(map[string]string{"url": dir, "hash": token}) // or myjsonStruct{hello:"json}
-}
-
-func saveUploadedFile(fh *multipart.FileHeader, destDirectory string) (int64, error) {
-	src, err := fh.Open()
-	if err != nil {
-		return 0, err
-	}
-	defer src.Close()
-
-	out, err := os.OpenFile(filepath.Join(destDirectory, fh.Filename),
-		os.O_WRONLY|os.O_CREATE, os.FileMode(0666))
+	// Create a file with the same name
+	out, err := os.OpenFile(dir+"/"+fname,
+		os.O_WRONLY|os.O_CREATE, 0666)
 
 	if err != nil {
-		return 0, err
+		ctx.StatusCode(iris.StatusInternalServerError)
+		ctx.JSON("{ error:" + err.Error() + "}")
+		return
 	}
 	defer out.Close()
 
-	return io.Copy(out, src)
+	io.Copy(out, file)
+
+	ctx.JSON(map[string]string{"url": dir, "file": fname, "hash": token}) // or myjsonStruct{hello:"json}
 }
 
+/*
+GenerateRandomBytes - generates random bytes into a bye array
+*/
 func GenerateRandomBytes(n int) ([]byte, error) {
 	b := make([]byte, n)
 	_, err := rand.Read(b)
