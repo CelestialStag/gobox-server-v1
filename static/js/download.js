@@ -18,7 +18,7 @@ $("document").ready(function(){
 
 			if(json.type.includes("jpeg") || json.type.includes("png") || json.type.includes("gif") || json.type.includes("webp")){
 				// http://localhost:4040/api/v1/f/download/1015869f/PLQ2uBL.jpg example
-				$('#preview').attr('src', 'http://u.sawol.moe/api/v1/f/download/'+json.url)
+				$('#preview').attr('src', 'http://www.u.sawol.moe/api/v1/f/download/'+json.url)
 			}
 		}
 	});
@@ -42,6 +42,8 @@ $("document").ready(function(){
 	$("#download").on('click', (e) => {
 		e.preventDefault();
 		let url = '/api/v1/f/download/'+e.target.value;
+		console.log(url);
+		
 		downloadURL(url)
 	});
 

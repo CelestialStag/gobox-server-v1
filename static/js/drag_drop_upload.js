@@ -105,7 +105,7 @@ $("document").ready(function(){
 			complete: function(d) {
 				json = JSON.parse(d.responseText)
 
-				$('#link').attr('value', 'u.sawol.moe/f/'+json.hash)
+				$('#link').attr('value', 'https://www.u.sawol.moe/f/'+json.hash)
 
 				console.log(d.responseText);
 			}
