@@ -4,6 +4,8 @@ mixin withGo
 doctype html
 html
 	head
+		meta(name='viewport', content='width=device-width')
+
 		title= .title
 		
 		// local assets
@@ -23,7 +25,7 @@ html
 	body(class='orange-tint center')
 
 		a(href='/')
-			h1(class='cerulean-text') gopy
+			h1(class='text-cerulean') gopy
 
 		div(class='container text-center')
 			block content
