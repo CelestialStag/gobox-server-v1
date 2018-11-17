@@ -1,35 +1,33 @@
 $("document").ready(function(){
-	
-	if($("screen").length > 0)
-	{
-		$("screen").on('dragenter', (e) => {
-			e.preventDefault();
-			e.stopPropagation();
-			
-			$(e.target).addClass("active");
-		});
 
-		$("screen").on('dragover', (e) => {
-			e.preventDefault();
-			e.stopPropagation();
-			
-			$(e.target).addClass("active");
-		});
+	$("screen").on('dragenter', (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		
+		$(e.target).addClass("active");
+	});
 
-		$("screen").on('dragleave', (e) => {
-			e.preventDefault();
-			e.stopPropagation();
-			
-			$(e.target).removeClass("active");
-		});
+	$("screen").on('dragover', (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		
+		$(e.target).addClass("active");
+	});
 
-		$("screen").on('drop', (e) => {
-			e.preventDefault();
-			e.stopPropagation();
-			
-			$(e.target).addClass("active");
-		});
-	}
+	$("screen").on('dragleave', (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		
+		$(e.target).removeClass("active");
+	});
+
+	$("screen").on('drop', (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		
+		$(e.target).addClass("active");
+	});
+
 	
 	$("body").on('dragenter', (e) => {
 		e.preventDefault();
