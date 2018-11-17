@@ -54,25 +54,22 @@ $("document").ready(function(){
 		e.preventDefault();
 		e.stopPropagation();
 		
+		$(".screen").removeClass("active");
+		
+		$form = $("#form")
+		$input = $("#form input[type='file'")
+		let droppedFiles = e.originalEvent.dataTransfer.files
+		
+		let url = '/api/v1/f/upload'
+		
+		var ajaxData = new FormData($form.get(0));
+		
+		$.each( droppedFiles, function(i, file) {
+			ajaxData.append( $input.attr('name'), file );
+		});
 
-		if($("screen").length > 0)
-		{
-			$(".screen").removeClass("active");
-			
-			$form = $("#form")
-			$input = $("#form input[type='file'")
-			let droppedFiles = e.originalEvent.dataTransfer.files
-			
-			let url = '/api/v1/f/upload'
-			
-			var ajaxData = new FormData($form.get(0));
-			
-			$.each( droppedFiles, function(i, file) {
-				ajaxData.append( $input.attr('name'), file );
-			});
+		sendFile($form, ajaxData)
 
-			sendFile($form, ajaxData)
-		}
 	});
 
 	$("#submit").on('click', (e) => {
