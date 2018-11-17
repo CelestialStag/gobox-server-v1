@@ -1,33 +1,36 @@
 $("document").ready(function(){
-
-	$("screen").on('dragenter', (e) => {
-		e.preventDefault();
-		e.stopPropagation();
-		
-		$(e.target).addClass("active");
-	});
 	
-	$("screen").on('dragover', (e) => {
-		e.preventDefault();
-		e.stopPropagation();
-		
-		$(e.target).addClass("active");
-	});
+	if($("screen").length > 0)
+	{
+		$("screen").on('dragenter', (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			
+			$(e.target).addClass("active");
+		});
+
+		$("screen").on('dragover', (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			
+			$(e.target).addClass("active");
+		});
+
+		$("screen").on('dragleave', (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			
+			$(e.target).removeClass("active");
+		});
+
+		$("screen").on('drop', (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			
+			$(e.target).addClass("active");
+		});
+	}
 	
-	$("screen").on('dragleave', (e) => {
-		e.preventDefault();
-		e.stopPropagation();
-
-		$(e.target).removeClass("active");
-	});
-
-	$("screen").on('drop', (e) => {
-		e.preventDefault();
-		e.stopPropagation();
-		
-		$(e.target).addClass("active");
-	});
-
 	$("body").on('dragenter', (e) => {
 		e.preventDefault();
 		e.stopPropagation();
@@ -53,21 +56,25 @@ $("document").ready(function(){
 		e.preventDefault();
 		e.stopPropagation();
 		
-		$(".screen").removeClass("active");
-		
-		$form = $("#form")
-		$input = $("#form input[type='file'")
-		let droppedFiles = e.originalEvent.dataTransfer.files
-		
-		let url = '/api/v1/f/upload'
-		
-		var ajaxData = new FormData($form.get(0));
-		
-		$.each( droppedFiles, function(i, file) {
-			ajaxData.append( $input.attr('name'), file );
-		});
 
-		sendFile($form, ajaxData)
+		if($("screen").length > 0)
+		{
+			$(".screen").removeClass("active");
+			
+			$form = $("#form")
+			$input = $("#form input[type='file'")
+			let droppedFiles = e.originalEvent.dataTransfer.files
+			
+			let url = '/api/v1/f/upload'
+			
+			var ajaxData = new FormData($form.get(0));
+			
+			$.each( droppedFiles, function(i, file) {
+				ajaxData.append( $input.attr('name'), file );
+			});
+
+			sendFile($form, ajaxData)
+		}
 	});
 
 	$("#submit").on('click', (e) => {
