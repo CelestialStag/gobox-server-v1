@@ -20,6 +20,9 @@ $("document").ready(function(){
 				// http://localhost:4040/api/v1/f/download/1015869f/PLQ2uBL.jpg example
 				$('#preview').attr('src', 'http://www.u.sawol.moe/api/v1/f/download/'+json.url)
 			}
+		},
+		error: (x, s, e) => {
+			$('#content').html(s + ': ' + e + '\n <small>File probably does not exist</small>')
 		}
 	});
 

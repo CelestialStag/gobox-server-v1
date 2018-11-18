@@ -22,10 +22,12 @@ html
 		link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.4.1/css/all.css',
 			integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz", crossorigin="anonymous")
 
-	body(class='orange-tint center')
+	body(class='bg-orange-tint flex-align-center' style='flex-direction: column;')
 
-		a(href='/')
-			h1(class='text-cerulean') gopy
 
-		div(class='container text-center')
+		div(class='container text-center' style='margin-top: 10%;')
+
+			a(href='/')
+				h1(class='text-cerulean') gopy
+
 			block content
