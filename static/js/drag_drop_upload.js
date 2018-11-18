@@ -82,9 +82,9 @@ $("document").ready(function(){
 		$form = $("#form")
 		var ajaxData = new FormData($form.get(0));
 		var name = document.getElementById('file-input');
-		file = name.files.item(0).name
+		file = name.files.item(0)
 
-		$('#progress-copy').first().find('label').html('Upload Progress: ' + file);
+		$('#progress-copy').first().find('label').html('Upload Progress: ' + file.name);
 
 		sendFile($form, ajaxData, file)
 	});
