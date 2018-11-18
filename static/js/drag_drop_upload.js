@@ -1,5 +1,8 @@
 $("document").ready(function(){
 
+	pause = false;
+	fileList = []
+
 	$("screen").on('dragenter', (e) => {
 		e.preventDefault();
 		e.stopPropagation();
@@ -60,15 +63,15 @@ $("document").ready(function(){
 		$input = $("#form input[type='file'")
 		let droppedFiles = e.originalEvent.dataTransfer.files
 		
-		let url = '/api/v1/f/upload'
-		
-		var ajaxData = new FormData($form.get(0));
-		
 		$.each( droppedFiles, function(i, file) {
+			$('#progress-copy').first().find('label').html('Upload Progress: ' + file.name);
+			
+			var ajaxData = new FormData($form.get(0));
 			ajaxData.append( $input.attr('name'), file );
+
+			sendFile($form, ajaxData, file)
 		});
 
-		sendFile($form, ajaxData)
 
 	});
 
@@ -78,14 +81,16 @@ $("document").ready(function(){
 
 		$form = $("#form")
 		var ajaxData = new FormData($form.get(0));
+		var name = document.getElementById('file-input');
+		file = name.files.item(0).name
 
-		let url = '/api/v1/f/upload'
+		$('#progress-copy').first().find('label').html('Upload Progress: ' + file);
 
-		sendFile($form, ajaxData)
+		sendFile($form, ajaxData, file)
 	});
 
-
-	$("#link-c").on('click', (e) => {
+	/*
+	$("#link-c button").on('click', (e) => {
 		e.preventDefault();
 		e.stopPropagation();
 		
@@ -94,8 +99,21 @@ $("document").ready(function(){
 		document.execCommand("copy");
 	});
 
+	$("#link").on('click', (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		
+		let element = document.getElementById("link")
+		element.select();
+		document.execCommand("copy");
+	});
+	*/
 
-	function sendFile($form, ajaxData){
+	function sendFile($form, ajaxData, file){
+		var list = $('#progress-list');
+		var copy = $('#progress-copy').first().clone().removeClass('display-hidden');
+		var link = $('#link').first().clone().removeClass('display-hidden');
+
 		$.ajax({
 			url: $form.attr('action'),
 			type: $form.attr('method'),
@@ -104,12 +122,47 @@ $("document").ready(function(){
 			cache: false,
 			contentType: false,
 			processData: false,
+			xhr: () => {
+
+				var xhr = $.ajaxSettings.xhr();
+				
+				link.attr('value', file.name);
+
+				list.append(copy);
+				copy.find('label').append(link);
+				
+				xhr.upload.onprogress = function (e) {
+
+					if (e.lengthComputable) {
+						copy.find('progress').attr('value', (e.loaded / e.total) * 100);
+					}
+				};
+
+				return xhr;
+			},
 			complete: function(d) {
 				json = JSON.parse(d.responseText)
 
-				$('#link').attr('value', 'https://www.u.sawol.moe/f/'+json.hash)
+				copy.find('progress').removeClass('progress-primary');
+				copy.find('progress').addClass('progress-success');
 
-				console.log(d.responseText);
+				link.attr('value', 'https://www.u.sawol.moe/f/'+json.hash);
+				link.on('click', (e) => {
+					e.preventDefault();
+					e.stopPropagation();
+					
+					e.target.select();
+					document.execCommand("copy");
+				});
+
+				//console.log(d.responseText);
+			},
+			error: (x, s, e) => {
+
+				copy.find('progress').removeClass('progress-primary');
+				copy.find('progress').addClass('progress-error');
+
+				link.attr('value', s + ":" + e);
 			}
 		});
 	}
