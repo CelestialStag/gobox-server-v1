@@ -6,9 +6,9 @@ contains the main entry point for the program
 package main
 
 import (
-	"gopy/routes"
-	"gopy/routes/api"
-	"gopy/routes/root"
+	"bitbucket.org/CeruleanSong/gopy/routes"
+	"bitbucket.org/CeruleanSong/gopy/api"
+	"bitbucket.org/CeruleanSong/gopy/root"
 
 	"github.com/kataras/iris"
 
