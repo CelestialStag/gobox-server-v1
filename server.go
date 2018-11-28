@@ -7,9 +7,15 @@ Creates the iris object. Sets all of the options, and determines the routes
 package main
 
 import (
+<<<<<<< HEAD
 	"./routes"
 	"./routes/api"
 	"./routes/root"
+=======
+	"bitbucket.org/CeruleanSong/gopy/routes"
+	"bitbucket.org/CeruleanSong/gopy/api"
+	"bitbucket.org/CeruleanSong/gopy/root"
+>>>>>>> f4572fc88c28d9f064c1e957d24f25dbe0e0ae85
 
 	"github.com/kataras/iris"
 
