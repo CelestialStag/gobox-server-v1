@@ -1,14 +1,15 @@
 /*
 server.go
 @package main
-contains the main entry point for the program
+contains the main entry point for the program.
+Creates the iris object. Sets all of the options, and determines the routes
 */
 package main
 
 import (
-	"gopy/routes"
-	"gopy/routes/api"
-	"gopy/routes/root"
+	"./routes"
+	"./routes/api"
+	"./routes/root"
 
 	"github.com/kataras/iris"
 
