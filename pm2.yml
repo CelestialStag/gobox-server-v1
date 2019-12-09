@@ -1,6 +1,6 @@
 apps:
   - script    : ./build.sh
-    name      : gobox.emawa.io
+    name      : gobox
     instances : 1
     watch     : true
     exec_mode : cluster
