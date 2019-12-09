@@ -1,5 +1,5 @@
 apps:
-  - script    : ./build.sh && ./build.sh run
+  - script    : ./build.sh
     name      : gobox.emawa.io
     instances : 1
     watch     : true
