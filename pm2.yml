@@ -1,6 +1,7 @@
 apps:
-  - script    : ./build.sh
+  - interpreter : bash
+    script    : ./build.sh
     name      : gobox
-    instances : 1
-    watch     : true
-    exec_mode : cluster
+    watch     : false
+    exec_mode : fork_mode
+  

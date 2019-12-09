@@ -18,6 +18,7 @@ require (
 	github.com/iris-contrib/formBinder v5.0.0+incompatible // indirect
 	github.com/iris-contrib/httpexpect v0.0.0-20180314041918-ebe99fcebbce // indirect
 	github.com/json-iterator/go v1.1.8 // indirect
+	github.com/juju/errors v0.0.0-20190930114154-d42613fe1ab9 // indirect
 	github.com/kataras/iris v11.1.1+incompatible
 	github.com/kataras/iris/v12 v12.0.1
 	github.com/klauspost/compress v1.9.4 // indirect
@@ -35,7 +36,9 @@ require (
 	github.com/yudai/golcs v0.0.0-20170316035057-ecda9a501e82 // indirect
 	go.mongodb.org/mongo-driver v1.1.3
 	golang.org/x/crypto v0.0.0-20191206172530-e9b2fee46413 // indirect
+	golang.org/x/net v0.0.0-20191207000613-e7e4b65ae663 // indirect
 	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e // indirect
+	golang.org/x/sys v0.0.0-20191206220618-eeba5f6aabab // indirect
 	gopkg.in/go-playground/validator.v9 v9.30.2 // indirect
 	gopkg.in/yaml.v2 v2.2.7 // indirect
 )

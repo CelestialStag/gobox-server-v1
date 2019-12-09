@@ -1,17 +1,17 @@
 #!/bin/bash
 
-if [ $1 = "run" ]
+if [[ $1 = "run" ]]
 then
 	echo "running..."
 
 	./dist/gopy
 
 	echo "done..."
-elif [ $1 = "build" ]
+elif [[ $1 = "build" ]]
 then
 	echo "building..."
 	
-	rm -r ./dist
+	[ -e "./dist" ] && rm -rf ./dist
 	cd src
 	go build -o ../dist/gopy
 
