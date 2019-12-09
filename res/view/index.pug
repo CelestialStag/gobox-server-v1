@@ -1,0 +1,28 @@
+extends res/view/_partial/layout.pug
+
+block content
+	
+	p.
+		Drag & Drop to upload
+
+	form(id='form', action="/api/file/upload", enctype="multipart/form-data", method="POST")
+
+		label(class='file-input text-large')
+			input(type="file", id='file-input', name="file") select file
+		| &nbsp;
+		input(type="submit", class='outline text-large', id='submit', value='upload')
+		input(type="hidden", name="token", value=.token)
+	br
+	
+	// template for file link
+	div(class='section display-hidden' id="link-c")
+		input(type="text", id="link", value='Your file link will appear here', style='border: none;', class='text-center grey-light text-cerulean', readonly)
+	
+	div(id='progress-container', class='section text-left')
+		ul(id='progress-list' file='' class='')
+			li(id='progress-copy', class='display-hidden')
+				label Upload Progress: 
+				progress(class='progress-primary', value='0', max='100')
+		
+
+	div(class='screen')

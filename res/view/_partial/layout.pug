@@ -1,0 +1,37 @@
+mixin withGo
+	Generating Go html/template output.
+
+doctype html
+html
+	head
+		meta(name='viewport', content='width=device-width')
+
+		title= .title
+		
+		// local assets
+		script(type='text/javascript', src='/public/js/jquery-3.4.1.min.js')
+		script(type='text/javascript', src='/public/js/drag_drop_upload.js')
+		
+		link(rel='stylesheet', type='text/css', href='/public/css/style.css')
+		link(rel='shortcut icon', type='x-icon' href='/public/favicon.ico')
+
+		// ashleycss
+		link(rel='stylesheet', type='text/css', href='https://unpkg.com/ashleycss')
+		
+		// Font Awesome
+		link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.4.1/css/all.css',
+			integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz", crossorigin="anonymous")
+
+	body(class='bg-cream flex-align-center flex-direction-vertical')
+		div(class='container text-center' style='margin-top: 10%;')
+
+			a(href='/')
+				h1(class='text-cerulean') GoBox
+
+			block content
+
+		footer(class="small")
+			small
+				.With Elias Mawa
+					| &nbsp;
+					i(class="fa fa-heart")
