@@ -13,6 +13,7 @@ html
 		script(type='text/javascript', src='/public/js/drag_drop_upload.js')
 		
 		link(rel='stylesheet', type='text/css', href='/public/css/style.css')
+		//- link(rel='stylesheet', type='text/css', href='/public/css/ashleycss-dark.min.css')
 		link(rel='shortcut icon', type='x-icon' href='/public/favicon.ico')
 
 		// ashleycss
@@ -22,16 +23,15 @@ html
 		link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.4.1/css/all.css',
 			integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz", crossorigin="anonymous")
 
-	body(class='bg-cream flex-align-center flex-direction-vertical')
-		div(class='container text-center' style='margin-top: 10%;')
+	body(class='bg-cream flex-align-center flex-direction-vertical center')
+		div(id="mast", class='container text-center')
 
-			a(href='/')
-				h1(class='text-cerulean') GoBox
+			a(href='/') #[h1(class='color-orange') GoBox]
 
 			block content
 
-		footer(class="small")
+		footer
 			small
-				.With Elias Mawa
-					| &nbsp;
-					i(class="fa fa-heart")
+				|By Elias Mawa
+				|&nbsp;
+				|#[i(class="fa fa-heart")]
