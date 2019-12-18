@@ -51,7 +51,7 @@ main - Gets the iris object and runs it
 func main() {
 	app := initialize()
 
-	app.Run(iris.Addr(":6060"),
+	app.Run(iris.Addr(":7070"),
 		iris.WithPostMaxMemory(2.5e+9),
 		iris.WithoutServerError(iris.ErrServerClosed))
 }

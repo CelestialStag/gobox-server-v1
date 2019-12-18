@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 if [[ $1 = "run" ]]
 then
 	echo "running..."
@@ -12,7 +11,7 @@ elif [[ $1 = "build" ]]
 then
 	echo "building..."
 	
-	rm -r ./dist
+	[ -e "./dist" ] && rm -rf ./dist
 	cd src
 	go build -o ../dist/gopy
 
