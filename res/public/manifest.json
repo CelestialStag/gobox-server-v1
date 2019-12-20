@@ -19,6 +19,6 @@
 	],
 	"start_url": ".",
 	"display": "standalone",
-	"theme_color": "#6d6d6d",
+	"theme_color": "#ffb7c5",
 	"background_color": "#ffb7c5"
   }
