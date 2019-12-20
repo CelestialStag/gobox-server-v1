@@ -69,6 +69,8 @@ func (c *FileController) Download(ctx iris.Context) {
 
 	if strings.Contains(json["name"], "jpeg") || strings.Contains(json["name"], "jpg") || strings.Contains(json["name"], "png") || strings.Contains(json["name"], "gif") || strings.Contains(json["name"], "webp") || strings.Contains(json["name"], "apng") {
 		json["img"] = "https://" + ctx.Host() + "/api/file/download/" + url
+		large := "1"
+		ctx.ViewData("large", large)
 	} else {
 		json["img"] = "https://gobox.emawa.io/public/img/gobox/logo-4.png"
 	}

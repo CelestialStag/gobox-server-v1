@@ -29,7 +29,11 @@ html
 			//- div #{.data.img}
 
 			//- <!-- Twitter -->
-			meta(name="twitter:card", content="summary_large_image")
+			if(.large)
+				meta(name="twitter:card", content="summary_large_image")
+			else
+				meta(name="twitter:card", content="summary_image")
+				
 			meta(name="twitter:url", content=.data.url)
 			meta(name="twitter:title", content=.data.title, id="tw-title")
 			meta(name="twitter:description", content=.data.description)
@@ -52,7 +56,7 @@ html
 			meta(name="og:image", content="https://gobox.emawa.io/public/img/gobox/logo-8.png", id="og-img")
 
 			//- <!-- Twitter -->
-			meta(name="twitter:card", content="summary_large_image")
+			meta(name="twitter:card", content="summary_image")
 			meta(name="twitter:url", content="https://gobox.emawa.io")
 			meta(name="twitter:title", content="GoBox", id="tw-title")
 			meta(name="twitter:description", content="Free, private and high speed file hosting from gobox.dev", id="tw-desc")
