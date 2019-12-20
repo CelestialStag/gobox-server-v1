@@ -1,4 +1,6 @@
-mixin withGo
+:go:func Index(url string, youAreUsingJade bool)
+
+mixin for(golang)
 	Generating Go html/template output.
 
 doctype html
@@ -6,29 +8,57 @@ html
 	head
 		meta(name='viewport', content='width=device-width')
 
-		title(id="title") GoBox
-		//- primary
-		meta(name="title", content="GoBox", id="title")
-		meta(name="description", content="Free, private and high speed file hosting by gobox.dev", id="desc")
 		link(rel='shortcut icon', type='image/x-icon' href='https://gobox.emawa.io/public/favicon.ico')
+		
+		if(.data)
+			title(id="title") GoBox: #{.data.name}
+			//- primary
+			meta(name="title", content=.data.title, id="title")
+			meta(name="description", content=.data.description, id="desc")
 
-		link(rel="manifest", href="https://gobox.emawa.io/public/manifest.json")
+			link(rel="manifest", href="https://gobox.emawa.io/public/manifest.json")
 
-		//- Open Graph / Facebook
-		meta(name="og:type", content="website")
-		meta(name="og:url", content="https://gobox.emawa.io")
-		meta(name="og:title", content="GoBox", id="og-title")
-		meta(name="og:description", content="Free, private and high speed file hosting by gobox.dev", id="og-desc")
-		meta(name="og:image", content="https://gobox.emawa.io/public/img/gobox/logo-8.png", id="og-img")
+			//- Open Graph / Facebook
+			//- - var url = .data.url
+			meta(name="og:type", content="website")
+			meta(name="og:url", content=.data.url)
+			meta(name="og:title", content=.data.name, id="og-title")
+			meta(name="og:description", content=.data.description)
+			meta(name="og:image", content=.data.img, id="og-img")
+			
+			//- div #{.data.img}
 
-		//- <!-- Twitter -->
-		meta(name="twitter:card", content="summary_large_image")
-		meta(name="twitter:url", content="https://gobox.emawa.io")
-		meta(name="twitter:title", content="GoBox", id="tw-title")
-		meta(name="twitter:description", content="Free private, high speed file hosting by gobox.dev", id="tw-desc")
-		meta(name="twitter:image", content="https://gobox.emawa.io/public/img/gobox/logo-8.png", id="tw-img")
+			//- <!-- Twitter -->
+			meta(name="twitter:card", content="summary_large_image")
+			meta(name="twitter:url", content=.data.url)
+			meta(name="twitter:title", content=.data.title, id="tw-title")
+			meta(name="twitter:description", content=.data.description)
+			meta(name="twitter:image", content=".data.img", id="tw-img")
 
-		link(rel="apple-touch-icon", href="https://gobox.emawa.io/public/img/gobox/logo-8.png", id="ap-img")
+			link(rel="apple-touch-icon", href="/public/favicon.ico", id="ap-img")
+		else			
+			title(id="title") GoBox
+			//- primary
+			meta(name="title", content="GoBox", id="title")
+			meta(name="description", content="Free, private and high speed file hosting by gobox.dev", id="desc")
+
+			link(rel="manifest", href="https://gobox.emawa.io/public/manifest.json")
+
+			//- Open Graph / Facebook
+			meta(name="og:type", content="website")
+			meta(name="og:url", content="https://gobox.emawa.io")
+			meta(name="og:title", content="GoBox", id="og-title")
+			meta(name="og:description", content="Free, private and high speed file hosting by gobox.dev", id="og-desc")
+			meta(name="og:image", content="https://gobox.emawa.io/public/img/gobox/logo-8.png", id="og-img")
+
+			//- <!-- Twitter -->
+			meta(name="twitter:card", content="summary_large_image")
+			meta(name="twitter:url", content="https://gobox.emawa.io")
+			meta(name="twitter:title", content="GoBox", id="tw-title")
+			meta(name="twitter:description", content="Free private, high speed file hosting by gobox.dev", id="tw-desc")
+			meta(name="twitter:image", content="https://gobox.emawa.io/public/img/gobox/logo-8.png", id="tw-img")
+
+			link(rel="apple-touch-icon", href="https://gobox.emawa.io/public/img/gobox/logo-8.png", id="ap-img")
 
 		//- local assets
 		script(type='text/javascript', src='/public/js/jquery-3.4.1.min.js')

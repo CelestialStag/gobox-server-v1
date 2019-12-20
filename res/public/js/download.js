@@ -23,18 +23,18 @@ $("document").ready(function(){
 				$('#preview').attr('src', '/api/file/download/'+json.url)
 
 				// meta
-				$('title').html("GoBox: "+json.name)
-				$('#title').attr('content', "GoBox: "+json.name);
-				$('#og-title').attr('content', "GoBox: "+json.name);
-				$('#tw-title').attr('content', "GoBox: "+json.name);
+				// $('title').html("GoBox: "+json.name)
+				// $('#title').attr('content', "GoBox: "+json.name);
+				// $('#og-title').attr('content', "GoBox: "+json.name);
+				// $('#tw-title').attr('content', "GoBox: "+json.name);
 	
-				$('#desc').attr("content", "Download file: "+json.name+" at gobox.dev. Free private, high speed file hosting")
-				$('#og-desc').attr("content", "Download file: "+json.name+" at gobox.dev. Free private, high speed file hosting")
-				$('#tw-desc').attr("content", "Download file: "+json.name+" at gobox.dev. Free private, high speed file hosting")
+				// $('#desc').attr("content", "Download file: "+json.name+" at gobox.dev. Free private, high speed file hosting")
+				// $('#og-desc').attr("content", "Download file: "+json.name+" at gobox.dev. Free private, high speed file hosting")
+				// $('#tw-desc').attr("content", "Download file: "+json.name+" at gobox.dev. Free private, high speed file hosting")
 	
-				$('#og-img').attr("content", '/api/file/download/'+json.url);
-				$('#tw-img').attr("content", '/api/file/download/'+json.url);
-				$('#ap-img').attr("content", '/api/file/download/'+json.url);
+				// $('#og-img').attr("content", '/api/file/download/'+json.url);
+				// $('#tw-img').attr("content", '/api/file/download/'+json.url);
+				// $('#ap-img').attr("content", '/api/file/download/'+json.url);
 			}
 
 			if(json.type.includes("webm") || json.type.includes("mp4") || json.type.includes("mkv") || json.type.includes("ogv") || json.type.includes("ogg")){
@@ -42,18 +42,18 @@ $("document").ready(function(){
 				$('#preview-video').addClass("active");
 
 				// meta
-				$('title').html("GoBox: "+json.name)
-				$('#title').attr('content', "GoBox: "+json.name);
-				$('#og-title').attr('content', "GoBox: "+json.name);
-				$('#tw-title').attr('content', "GoBox: "+json.name);
+				// $('title').html("GoBox: "+json.name)
+				// $('#title').attr('content', "GoBox: "+json.name);
+				// $('#og-title').attr('content', "GoBox: "+json.name);
+				// $('#tw-title').attr('content', "GoBox: "+json.name);
 	
-				$('#desc').attr("content", "Download file: "+json.name+" at gobox.dev. Free private, high speed file hosting")
-				$('#og-desc').attr("content", "Download file: "+json.name+" at gobox.dev. Free private, high speed file hosting")
-				$('#tw-desc').attr("content", "Download file: "+json.name+" at gobox.dev. Free private, high speed file hosting")
+				// $('#desc').attr("content", "Download file: "+json.name+" at gobox.dev. Free private, high speed file hosting")
+				// $('#og-desc').attr("content", "Download file: "+json.name+" at gobox.dev. Free private, high speed file hosting")
+				// $('#tw-desc').attr("content", "Download file: "+json.name+" at gobox.dev. Free private, high speed file hosting")
 	
-				$('#og-img').attr("content", '/api/file/download/'+json.url);
-				$('#tw-img').attr("content", '/api/file/download/'+json.url);
-				$('#ap-img').attr("content", '/api/file/download/'+json.url);
+				// $('#og-img').attr("content", '/api/file/download/'+json.url);
+				// $('#tw-img').attr("content", '/api/file/download/'+json.url);
+				// $('#ap-img').attr("content", '/api/file/download/'+json.url);
 			}
 		},
 		error: (x, s, e) => {
