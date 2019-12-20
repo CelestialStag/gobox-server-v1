@@ -85,6 +85,14 @@ img{
 	display: none;
 }
 
+#preview-audio {
+	max-width: 80%;
+	/* max-height: 60vh; */
+
+	visibility: hidden;
+	display: none;
+}
+
 #content {
 	/* margin: 2% 0%; */
 }

@@ -37,7 +37,7 @@ $("document").ready(function(){
 				// $('#ap-img').attr("content", '/api/file/download/'+json.url);
 			}
 
-			if(json.type.includes("webm") || json.type.includes("mp4") || json.type.includes("mkv") || json.type.includes("x-matroska") || json.type.includes("ogv") || json.type.includes("ogg")){
+			if(json.type.includes("webm") || json.type.includes("mp4") || json.type.includes("mkv") || json.type.includes("x-matroska") || json.type.includes("video/ogv") || json.type.includes("ogg")){
 				$('#preview-video').attr('src', '/api/file/download/'+json.url)
 				$('#preview-video').addClass("active");
 
@@ -54,6 +54,12 @@ $("document").ready(function(){
 				// $('#og-img').attr("content", '/api/file/download/'+json.url);
 				// $('#tw-img').attr("content", '/api/file/download/'+json.url);
 				// $('#ap-img').attr("content", '/api/file/download/'+json.url);
+			}
+
+			if(json.type.includes("mp3") || json.type.includes("mpeg") || json.type.includes("audio/ogg") || json.type.includes("3gpp") || json.type.includes("wav") || json.type.includes("m4a")){
+				$('#preview-audio').attr('src', '/api/file/download/'+json.url)
+				$('#preview-audio').attr('type', json.type)
+				$('#preview-audio').addClass("active");
 			}
 		},
 		error: (x, s, e) => {
