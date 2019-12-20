@@ -86,6 +86,7 @@ func (c *FileController) Download(ctx iris.Context) {
 
 	} else {
 		json["name"] = "file does not exist"
+		ctx.StatusCode(400)
 	}
 	id := ctx.Params().GetString("id")
 

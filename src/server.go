@@ -21,6 +21,19 @@ func initialize() *iris.Application {
 	app.Use(recover.New())
 	app.Use(logger.New())
 
+	// Errors
+	app.OnErrorCode(iris.StatusNotFound, func(ctx iris.Context) {
+		ctx.ViewData("message", "This page does not exist!")
+		ctx.ViewData("error", "ERROR 404")
+		ctx.View("error/404.pug")
+	})
+
+	app.OnErrorCode(iris.StatusInternalServerError, func(ctx iris.Context) {
+		ctx.ViewData("message", "Internal server error!")
+		ctx.ViewData("error", "ERROR 500")
+		ctx.View("error/404.pug")
+	})
+
 	// Static files
 	app.HandleDir("/public", "res/public", iris.DirOptions{
 		Gzip: false,

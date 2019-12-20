@@ -58,10 +58,12 @@ $("document").ready(function(){
 		},
 		error: (x, s, e) => {
 			
-			if(x.status == 400) {
-				$('#content').html(s + ': ' + e + '\n <small>file probably does not exist or was deleted in a wipe</small>')
+			if(x.status == 404) {
+				$('#content').html(s + ': ' + e + '\n <small>file probably does not exist or was deleted in a wipe</small>');
 			} else if (x.status == 500) {
-				$('#content').html(s + ': ' + e + '\n <small>error reading file from disk <br> (reloading the page might help)</small>')
+				$('#content').html(s + ': ' + e + '\n <small>error reading file from disk <br> (reloading the page might help)</small>');
+			} else {
+				$('#content').html(s + ': ' + e);
 			}
 		}
 	});

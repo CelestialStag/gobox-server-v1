@@ -39,24 +39,29 @@ func (c *FileController) BeforeActivation(b mvc.BeforeActivation) {
 		list, err := f.Readdir(-1)
 		f.Close()
 
-		file := dir + "/" + list[0].Name()
-		url := folder + "/" + list[0].Name()
+		if len(list) > 0 {
+			file := dir + "/" + list[0].Name()
+			url := folder + "/" + list[0].Name()
 
-		buf, _ := ioutil.ReadFile(file)
-		kind, unknown := filetype.Match(buf)
-		if unknown != nil {
-			fmt.Printf("Unknown: %s", unknown)
+			buf, _ := ioutil.ReadFile(file)
+			kind, unknown := filetype.Match(buf)
+			if unknown != nil {
+				fmt.Printf("Unknown: %s", unknown)
+			}
+
+			json["name"] = list[0].Name()
+			json["size"] = fmt.Sprintf("%.0f", float64(list[0].Size())) // fmt.Sprintf("%.2f", float64(list[0].Size())/1e+6)
+			json["type"] = kind.MIME.Value
+			json["url"] = url
+			json["id"] = folder
+			json["uploaded"] = "n/a"
+			json["expires"] = "n/a"
+
+			ctx.JSON(json)
+		} else {
+			ctx.StatusCode(404)
+			// ctx.JSON("{ error:" + err.Error() + "}")
 		}
-
-		json["name"] = list[0].Name()
-		json["size"] = fmt.Sprintf("%.0f", float64(list[0].Size())) // fmt.Sprintf("%.2f", float64(list[0].Size())/1e+6)
-		json["type"] = kind.MIME.Value
-		json["url"] = url
-		json["id"] = folder
-		json["uploaded"] = "n/a"
-		json["expires"] = "n/a"
-
-		ctx.JSON(json)
 	}
 
 	b.Handle("GET", "/download/{id:string}/{file:string}", "Download", downloadMiddleware)
