@@ -1,5 +1,5 @@
 html, body {
-	position: relative;
+	/* position: relative;
 	
     padding:0;
     margin:0;
@@ -8,10 +8,32 @@ html, body {
     left:0;
 
     width: 100%;
-    height: 100%;
+    height: 100%; */
+	/* min-height: 100% !important; */
+	min-height: 100vh !important;
+}
 
-	position: relative;
-	min-height: 100% !important;
+#logo img {
+	/* height: 300px; */
+	width: 40%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.small-img {
+	/* height: 300px; */
+	width: 20% !important;
+}
+
+#logo {
+	margin-bottom: 2%;
+}
+
+footer {
+	/* margin: 0 auto; */
+	bottom: 0px;
+	position: absolute;
 }
 
 li{
@@ -45,13 +67,11 @@ img{
 	background:rgba(0, 0, 0, 0.6);
 }
 
-footer {
-	bottom: 0px;
-	/* display: flex; */
-	/* position: fixed; */
-}
-
 .active {
 	visibility: visible;
 	display: initial;
+}
+
+#preview {
+	border-radius: 5%;
 }

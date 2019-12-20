@@ -1,5 +1,7 @@
 $("document").ready(function(){
 
+	$('#logo img').addClass("small-img");
+
 	$.ajax({
 		url: '/api/file/info/'+$("#id").attr('value'),
 		type: 'GET',
@@ -10,6 +12,7 @@ $("document").ready(function(){
 			json = JSON.parse(d.responseText)
 			console.log(json)
 			$('#name').html(json.name)
+			// $('#title').html("FILE: "+json.name)
 			$('#size').html(humanFileSize(json.size, true))
 			$('#expires').html(json.expires)
 			$('#uploaded').html(json.uploaded)
@@ -19,6 +22,7 @@ $("document").ready(function(){
 			if(json.type.includes("jpeg") || json.type.includes("png") || json.type.includes("gif") || json.type.includes("webp")){
 				// http://localhost:4040/api/v1/f/download/1015869f/PLQ2uBL.jpg example
 				$('#preview').attr('src', '/api/file/download/'+json.url)
+				// $('#preview').attr('src', '/api/file/download/'+json.url)
 			}
 		},
 		error: (x, s, e) => {

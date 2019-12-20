@@ -6,9 +6,26 @@ html
 	head
 		meta(name='viewport', content='width=device-width')
 
-		title= .title
-		
-		// local assets
+		title(id="title") GoBox
+		//- primary
+		meta(name="title", content="GoBox")
+		meta(name="description", content="Free & Private File Hosting")
+
+		//- Open Graph / Facebook
+		meta(name="og:type", content="website")
+		meta(name="og:url", content="https://gobox.emawa.io")
+		meta(name="og:title", content="GoBox")
+		meta(name="og:description", content="Free & Private File Hosting")
+		meta(name="og:image", content="https://gobox.emawa.io/public/img/gobox/logo-6")
+
+		//- <!-- Twitter -->
+		meta(name="twitter:card", content="summary_large_image")
+		meta(name="twitter:url", content="https://gobox.emawa.io")
+		meta(name="twitter:title", content="GoBox")
+		meta(name="twitter:description", content="Free & Private File Hosting")
+		meta(name="twitter:image", content="https://gobox.emawa.io/public/img/gobox/logo-6")
+
+		//- local assets
 		script(type='text/javascript', src='/public/js/jquery-3.4.1.min.js')
 		script(type='text/javascript', src='/public/js/drag_drop_upload.js')
 		
@@ -16,17 +33,19 @@ html
 		//- link(rel='stylesheet', type='text/css', href='/public/css/ashleycss-dark.min.css')
 		link(rel='shortcut icon', type='x-icon' href='/public/favicon.ico')
 
-		// ashleycss
+		//- ashleycss
 		link(rel='stylesheet', type='text/css', href='https://unpkg.com/ashleycss')
 		
-		// Font Awesome
+		//- Font Awesome
 		link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.4.1/css/all.css',
 			integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz", crossorigin="anonymous")
 
 	body(class='bg-cream flex-align-center flex-direction-vertical center')
-		div(id="mast", class='container text-center')
 
-			a(href='/') #[h1(class='color-orange') GoBox]
+		a(href='/' id="logo") #[img(src="/public/img/gobox/logo-1.png", class="")]
+
+		div(id="mast", class='container text-center')
+			//- a(href='/') #[h1(class='color-orange') GoBox] #[img(src="/public/img/gobox/logo-1.png", id='')]
 
 			block content
 
