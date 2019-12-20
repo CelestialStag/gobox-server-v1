@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 
 	"github.com/h2non/filetype"
 	"github.com/kataras/iris/v12"
@@ -66,8 +67,13 @@ func (c *FileController) Download(ctx iris.Context) {
 	json["uploaded"] = "n/a"
 	json["expires"] = "n/a"
 
-	json["img"] = "https://" + ctx.Host() + "/api/file/download/" + url
+	if strings.Contains(json["name"], "jpeg") || strings.Contains(json["name"], "jpg") || strings.Contains(json["name"], "png") || strings.Contains(json["name"], "gif") || strings.Contains(json["name"], "webp") || strings.Contains(json["name"], "apng") {
+		json["img"] = "https://" + ctx.Host() + "/api/file/download/" + url
+	} else {
+		json["img"] = "https://gobox.emawa.io/public/img/gobox/logo-4.png"
+	}
 	json["title"] = "GoBox: " + json["name"]
+
 	json["description"] = "Download <b>" + json["name"] + "</b>. Get more free and high speed file hosting at https://gobox.dev"
 
 	// ctx.JSON(json)
