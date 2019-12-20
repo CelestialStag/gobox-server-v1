@@ -66,7 +66,7 @@ func (c *FileController) Download(ctx iris.Context) {
 	json["uploaded"] = "n/a"
 	json["expires"] = "n/a"
 
-	json["img"] = ctx.Host() + "/api/file/download/" + url
+	json["img"] = "/api/file/download/" + url
 	json["title"] = "GoBox: " + json["name"]
 	json["description"] = "Download file " + json["name"] + ". Get more free and private and high speed file hosting at gobox.dev"
 
