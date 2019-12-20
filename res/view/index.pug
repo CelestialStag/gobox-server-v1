@@ -7,13 +7,14 @@ block content
 		#[br]
 		#[small max 1GB]
 
+	code(id="file-label") no file loaded
 	form(id='form', action="/api/file/upload", enctype="multipart/form-data", method="POST")
 
-		label(class='file-input text-large')
+		label(id="file-input-label", class='file-input text-large')
 			input(type="file", id='file-input', name="file") select file
 		| &nbsp;
 		input(type="submit", class='outline text-large', id='submit', value='upload')
-		input(type="hidden", name="token", value=.token)
+		input(type="hidden", id="file-data", name="token", value=.token)
 	br
 	
 	// template for file link

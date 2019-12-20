@@ -59,9 +59,9 @@ $("document").ready(function(){
 		
 		$(".screen").removeClass("active");
 		
-		$form = $("#form")
-		$input = $("#form input[type='file'")
-		let droppedFiles = e.originalEvent.dataTransfer.files
+		$form = $("#form");
+		$input = $("#form input[type='file'");
+		let droppedFiles = e.originalEvent.dataTransfer.files;
 		
 		$.each( droppedFiles, function(i, file) {
 			$('#progress-copy').first().find('label').html('Upload Progress: ' + file.name);
@@ -69,7 +69,7 @@ $("document").ready(function(){
 			var ajaxData = new FormData($form.get(0));
 			ajaxData.append( $input.attr('name'), file );
 
-			sendFile($form, ajaxData, file)
+			sendFile($form, ajaxData, file);
 		});
 
 
@@ -79,14 +79,27 @@ $("document").ready(function(){
 		e.preventDefault();
 		e.stopPropagation();
 
-		$form = $("#form")
+		var $form = $("#form")
 		var ajaxData = new FormData($form.get(0));
 		var name = document.getElementById('file-input');
-		file = name.files.item(0)
+		var file = name.files.item(0);
 
 		$('#progress-copy').first().find('label').html('Upload Progress: ' + file.name);
 
-		sendFile($form, ajaxData, file)
+		
+		var name = document.getElementById('file-input');
+		var file = name.files.item(0);
+		$("#file-label").html("no file loaded");
+		
+		sendFile($form, ajaxData, file);
+		
+		document.getElementById('file-input').value = null;
+	});
+
+	$("#file-input").on('change', (e) => {
+		var name = document.getElementById('file-input');
+		var file = name.files.item(0);
+		$("#file-label").html("loaded: "+file.name);
 	});
 
 	/*

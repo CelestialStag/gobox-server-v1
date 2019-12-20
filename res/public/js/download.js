@@ -19,10 +19,41 @@ $("document").ready(function(){
 			$('#type').html(json.type)
 			$('#download').attr('value', json.url)
 
-			if(json.type.includes("jpeg") || json.type.includes("png") || json.type.includes("gif") || json.type.includes("webp")){
-				// http://localhost:4040/api/v1/f/download/1015869f/PLQ2uBL.jpg example
+			if(json.type.includes("jpeg") || json.type.includes("png") || json.type.includes("gif") || json.type.includes("webp") || json.type.includes("jpg") || json.type.includes("svg") || json.type.includes("apng")){
 				$('#preview').attr('src', '/api/file/download/'+json.url)
-				// $('#preview').attr('src', '/api/file/download/'+json.url)
+
+				// meta
+				$('title').html("GoBox: "+json.name)
+				$('#title').attr('content', "GoBox: "+json.name);
+				$('#og-title').attr('content', "GoBox: "+json.name);
+				$('#tw-title').attr('content', "GoBox: "+json.name);
+	
+				$('#desc').attr("content", "Download file: "+json.name+" at gobox.dev. Free private, high speed file hosting")
+				$('#og-desc').attr("content", "Download file: "+json.name+" at gobox.dev. Free private, high speed file hosting")
+				$('#tw-desc').attr("content", "Download file: "+json.name+" at gobox.dev. Free private, high speed file hosting")
+	
+				$('#og-img').attr("content", '/api/file/download/'+json.url);
+				$('#tw-img').attr("content", '/api/file/download/'+json.url);
+				$('#ap-img').attr("content", '/api/file/download/'+json.url);
+			}
+
+			if(json.type.includes("webm") || json.type.includes("mp4") || json.type.includes("mkv") || json.type.includes("ogv") || json.type.includes("ogg")){
+				$('#preview-video').attr('src', '/api/file/download/'+json.url)
+				$('#preview-video').addClass("active");
+
+				// meta
+				$('title').html("GoBox: "+json.name)
+				$('#title').attr('content', "GoBox: "+json.name);
+				$('#og-title').attr('content', "GoBox: "+json.name);
+				$('#tw-title').attr('content', "GoBox: "+json.name);
+	
+				$('#desc').attr("content", "Download file: "+json.name+" at gobox.dev. Free private, high speed file hosting")
+				$('#og-desc').attr("content", "Download file: "+json.name+" at gobox.dev. Free private, high speed file hosting")
+				$('#tw-desc').attr("content", "Download file: "+json.name+" at gobox.dev. Free private, high speed file hosting")
+	
+				$('#og-img').attr("content", '/api/file/download/'+json.url);
+				$('#tw-img').attr("content", '/api/file/download/'+json.url);
+				$('#ap-img').attr("content", '/api/file/download/'+json.url);
 			}
 		},
 		error: (x, s, e) => {
@@ -36,7 +67,7 @@ $("document").ready(function(){
 			return bytes + ' B';
 		}
 		var units = si
-			? ['kB','MB','GB','TB','PB','EB','ZB','YB']
+			? ['KB','MB','GB','TB','PB','EB','ZB','YB']
 			: ['KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];
 		var u = -1;
 		do {

@@ -2,22 +2,24 @@ extends res/view/_partial/layout.pug
 
 block content
 
-	script(type='text/javascript', src='/public/js/download.js')
-
 	div(id='content', class='center')
 		div(id='id', value=.id, class="center")
 			img(src="", id='preview')
+			video(id='preview-video', controls)
+				| your browser does not support the video previews.
 
 			h6(id='name')
-
 			label(for='size') size:
-			code(id='size')
+				code(id='size')
 
 			div(class='row')
 				div(class='col')
-					label(for='expires') expires:
+					label(for='type') type:
+					code(id='type')
+					| &nbsp;
+					label(for='expires') uploaded:
 					code(id='expires')
-					| 
+					| &nbsp;
 					label(for='uploaded') uploaded:
 					code(id='uploaded')
 
@@ -35,4 +37,6 @@ block content
 			//- 	div(class='col')
 			//- 		label(for='type') type:
 			//- 		code(id='type')
-			button(id='download', type="button", class='outline', value="Download") Download
+			button(id='download', type="button", class='outline', value="Download") download
+
+	script(type='text/javascript', src='/public/js/download.js')
