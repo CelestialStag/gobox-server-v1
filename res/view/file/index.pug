@@ -2,8 +2,8 @@ extends res/view/_partial/layout.pug
 
 block content
 
-	div(id='content', class='center')
-		div(id='id', value=.id, class="center")
+	div(id='content', class='')
+		div(id='id', value=.id, class="")
 			img(src="", id='preview')
 			video(id='preview-video', controls)
 				| your browser does not support the video previews.
@@ -11,20 +11,20 @@ block content
 				source(id='preview-audio-source')
 				| your browser does not support the audio previews.
 
-			h6(id='name')
-			label(for='size') size:
-				code(id='size')
-
+			h4(id='name', class="color-grey-darkest")
 			div(class='row')
+				div(class='col')
+					label(for='size') size:
+						code(id='size')
 				div(class='col')
 					label(for='type') type:
 					code(id='type')
-					| &nbsp;
-					label(for='expires') uploaded:
-					code(id='expires')
-					| &nbsp;
+				div(class='col')
 					label(for='uploaded') uploaded:
-					code(id='uploaded')
+						code(id='uploaded')
+				div(class='col')
+					label(for='expires') expires:
+						code(id='expires')
 
 			//- div(class='row')
 			//- 	div(class='col')
