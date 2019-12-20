@@ -99,7 +99,11 @@ $("document").ready(function(){
 	$("#file-input").on('change', (e) => {
 		var name = document.getElementById('file-input');
 		var file = name.files.item(0);
-		$("#file-label").html("loaded: "+file.name);
+		if(file != null) {
+			$("#file-label").html("loaded: "+file.name);
+		} else {
+			$("#file-label").html("no file loaded");
+		}
 	});
 
 	/*
