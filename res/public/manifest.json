@@ -8,17 +8,27 @@
 		"type": "image/x-icon"
 	  },
 	  {
-		"src": "https://gobox.emawa.io/public/img/gobox/logo-8.png",
-		"sizes": "677x276"
-	  },
-	  {
-		"src": "https://gobox.emawa.io/public/img/gobox/logo-8.png",
+		"src": "public/img/gobox/logo-3.png",
 		"type": "image/png",
-		"sizes": "677x276"
-	  }	 
+		"sizes": "600x600"
+	  }
 	],
-	"start_url": ".",
+	"start_url": "/",
 	"display": "standalone",
 	"theme_color": "#ffb7c5",
-	"background_color": "#ffb7c5"
+	"background_color": "#ffb7c5",
+	"content_scripts": [
+		{
+			"matches": ["*://*.emawa.io/*"],
+			"js": [
+				"script.js",
+				"download.js",
+				"drag_drop_upload.js"
+			],
+			"css": [
+				"ashleycss.min.css",
+				"style.css"
+			]
+		}
+	  ]
   }
