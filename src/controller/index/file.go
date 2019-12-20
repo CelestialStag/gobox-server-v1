@@ -50,36 +50,43 @@ func (c *FileController) Download(ctx iris.Context) {
 	list, err := f.Readdir(-1)
 	f.Close()
 
-	file := dir + "/" + list[0].Name()
-	url := folder + "/" + list[0].Name()
-
-	buf, _ := ioutil.ReadFile(file)
-	kind, unknown := filetype.Match(buf)
-	if unknown != nil {
-		fmt.Printf("Unknown: %s", unknown)
-	}
-
-	json["name"] = list[0].Name()
-	json["size"] = fmt.Sprintf("%.0f", float64(list[0].Size())) // fmt.Sprintf("%.2f", float64(list[0].Size())/1e+6)
-	json["type"] = kind.MIME.Value
-	json["url"] = "/file/" + url
 	json["id"] = folder
 	json["uploaded"] = "n/a"
 	json["expires"] = "n/a"
 
-	if strings.Contains(json["name"], "jpeg") || strings.Contains(json["name"], "jpg") || strings.Contains(json["name"], "png") || strings.Contains(json["name"], "gif") || strings.Contains(json["name"], "webp") || strings.Contains(json["name"], "apng") {
-		json["img"] = "https://" + ctx.Host() + "/api/file/download/" + url
-		large := "1"
-		ctx.ViewData("large", large)
+	if len(list) > 0 {
+
+		file := dir + "/" + list[0].Name()
+		url := folder + "/" + list[0].Name()
+
+		buf, _ := ioutil.ReadFile(file)
+		kind, unknown := filetype.Match(buf)
+
+		if unknown != nil {
+			fmt.Printf("Unknown: %s", unknown)
+		}
+
+		json["name"] = list[0].Name()
+		json["size"] = fmt.Sprintf("%.0f", float64(list[0].Size())) // fmt.Sprintf("%.2f", float64(list[0].Size())/1e+6)
+		json["type"] = kind.MIME.Value
+		json["url"] = "/file/" + url
+
+		if strings.Contains(json["name"], "jpeg") || strings.Contains(json["name"], "jpg") || strings.Contains(json["name"], "png") || strings.Contains(json["name"], "gif") || strings.Contains(json["name"], "webp") || strings.Contains(json["name"], "apng") {
+			json["img"] = "https://" + ctx.Host() + "/api/file/download/" + url
+			large := "1"
+			ctx.ViewData("large", large)
+		} else {
+			json["img"] = "https://gobox.emawa.io/public/img/gobox/logo-4.png"
+		}
+		json["title"] = "GoBox: " + json["name"]
+
+		json["description"] = "Download <b>" + json["name"] + "</b>. Get more free and high speed file hosting at https://gobox.dev"
+
+		// ctx.JSON(json)
+
 	} else {
-		json["img"] = "https://gobox.emawa.io/public/img/gobox/logo-4.png"
+		json["name"] = "file does not exist"
 	}
-	json["title"] = "GoBox: " + json["name"]
-
-	json["description"] = "Download <b>" + json["name"] + "</b>. Get more free and high speed file hosting at https://gobox.dev"
-
-	// ctx.JSON(json)
-
 	id := ctx.Params().GetString("id")
 
 	ctx.ViewData("id", id)

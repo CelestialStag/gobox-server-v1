@@ -57,7 +57,7 @@ $("document").ready(function(){
 			}
 		},
 		error: (x, s, e) => {
-			$('#content').html(s + ': ' + e + '\n <small>File probably does not exist</small>')
+			$('#content').html(s + ': ' + e + '\n <small>file probably does not exist or was deleted in a wipe</small>')
 		}
 	});
 
