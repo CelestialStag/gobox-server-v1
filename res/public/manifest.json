@@ -1,0 +1,25 @@
+{
+	"short_name": "GoBox",
+	"name": "GoBox Upload Server",
+	"icons": [
+	  {
+		"src": "/public/favicon.ico",
+		"sizes": "64x64 32x32 24x24 16x16",
+		"type": "image/x-icon"
+	  },
+	  {
+		"src": "/public/img/gobox/logo-6.png",
+		"type": "image/png",
+		"sizes": "677x276"
+	  },
+	  {
+		"src": "/public/img/gobox/logo-6.png",
+		"type": "image/png",
+		"sizes": "677x276"
+	  }	 
+	],
+	"start_url": ".",
+	"display": "standalone",
+	"theme_color": "#6d6d6d",
+	"background_color": "#ffb7c5"
+  }
