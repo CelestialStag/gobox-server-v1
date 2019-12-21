@@ -11,6 +11,7 @@ html, body {
     height: 100%; */
 	/* min-height: 100% !important; */
 	min-height: 100vh !important;
+	position: relative;
 }
 
 #logo img {
@@ -32,7 +33,7 @@ html, body {
 
 footer {
 	/* margin: 0 auto; */
-	bottom: 0px;
+	bottom: 0;
 	position: absolute;
 }
 
