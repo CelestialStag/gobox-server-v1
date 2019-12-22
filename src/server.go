@@ -39,6 +39,10 @@ func initialize() *iris.Application {
 		Gzip: false,
 	})
 
+	app.HandleDir("/", "res/root", iris.DirOptions{
+		Gzip: false,
+	})
+
 	/* View Engine */
 	app.RegisterView(iris.Pug("res/view", ".pug").Reload(true))
 

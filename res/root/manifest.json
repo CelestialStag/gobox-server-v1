@@ -1,0 +1,49 @@
+{
+	"short_name": "GoBox",
+	"name": "GoBox Upload Server",
+	"icons": [
+		{
+		  "src": "https://gobox.emawa.io/favicon.ico",
+		  "sizes": "64x64",
+		  "type": "image/x-icon"
+		},
+		{
+		  "src": "https://gobox.emawa.io/favicon-2.ico",
+		  "sizes": "32x32",
+		  "type": "image/x-icon"
+		},
+		{
+		  "src": "https://gobox.emawa.io/favicon-3.ico",
+		  "sizes": "16x16",
+		  "type": "image/x-icon"
+		},
+		{
+		"src": "/public/img/gobox/logo-3.png",
+		"type": "image/png",
+		"sizes": "600x600"
+		},
+		{
+		"src": "/public/img/gobox/logo-16.png",
+		"type": "image/png",
+		"sizes": "600x600"
+		}
+	],
+	"start_url": "/",
+	"display": "standalone",
+	"theme_color": "#fff1d0",
+	"background_color": "#fff1d0",
+	"content_scripts": [
+		{
+			"matches": ["*://*.emawa.io/*"],
+			"js": [
+				"script.js",
+				"download.js",
+				"drag_drop_upload.js"
+			],
+			"css": [
+				"ashleycss.min.css",
+				"style.css"
+			]
+		}
+	  ]
+  }
