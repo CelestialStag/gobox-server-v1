@@ -2,18 +2,18 @@ extends res/view/_partial/layout.pug
 
 block content
 	
-	p.
+	//- #[br]
+	h5(class="text-shadow").
 		drag & drop files to upload
-		#[br]
-		#[small max 1GB upload]
+		#[h6 max 1GB upload]
 
-	code(id="file-label") no file loaded
+	code(id="file-label") no file selected
 	form(id='form', action="/api/file/upload", enctype="multipart/form-data", method="POST")
 
-		label(id="file-input-label", class='file-input text-large')
-			input(type="file", id='file-input', name="file") select file
-		| &nbsp;
-		input(type="submit", class='outline text-large', id='submit', value='upload')
+		label(id="file-input-label", class='file-input text-large border-sharp')
+			input(type="file", id='file-input', name="file", class="text-large") select
+		//- | &nbsp;
+		input(type="submit", class='outline text-large text-shadow border-sharp', id='submit', value='upload')
 		input(type="hidden", id="file-data", name="token", value=.token)
 	br
 	

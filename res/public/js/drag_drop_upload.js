@@ -89,7 +89,7 @@ $("document").ready(function(){
 		
 		var name = document.getElementById('file-input');
 		var file = name.files.item(0);
-		$("#file-label").html("no file loaded");
+		$("#file-label").html("no file selected");
 		
 		sendFile($form, ajaxData, file);
 		
@@ -102,7 +102,7 @@ $("document").ready(function(){
 		if(file != null) {
 			$("#file-label").html("loaded: "+file.name);
 		} else {
-			$("#file-label").html("no file loaded");
+			$("#file-label").html("no file selected");
 		}
 	});
 

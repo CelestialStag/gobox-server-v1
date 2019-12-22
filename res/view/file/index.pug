@@ -11,20 +11,45 @@ block content
 				source(id='preview-audio-source')
 				| your browser does not support the audio previews.
 
-			h4(id='name', class="color-grey-darkest")
+			h4(id='name', class="text-shadow")
+			
+			hr(class="bg-grey")
+			//- table(class="container center")
+			//- 	thead(class="text-center flex-justify-center")
+			//- 		th size
+			//- 		th type
+			//- 		th uploaded
+			//- 		th expires
+			//- 	tbody(class="text-center flex-justify-center")
+			//- 		tr
+
+			label(class="text-shadow") size: 
+			code(id='size')
+			| &nbsp; &nbsp;
+			label(class="text-shadow") type:
+			code(id='type')
+			| &nbsp; &nbsp;
+			label(class="text-shadow") uploaded:
+			code(id='uploaded')
+			| &nbsp; &nbsp;
+			label(class="text-shadow") expires:
+			code(id='expires')
+
+			hr(class="bg-grey")
+
+			//- label(for='size' class="text-shadow") size:
+			//- code(id='size')
+			//- | 
+			//- label(for='type') type:
+			//- code(id='type')
+			//- | 
+			//- label(for='uploaded') uploaded:
+			//- code(id='uploaded')
+			//- | 
+			//- label(for='expires') expires:
+			//- code(id='expires')
+			
 			div(class='row')
-				div(class='col')
-					label(for='size') size:
-						code(id='size')
-				div(class='col')
-					label(for='type') type:
-					code(id='type')
-				div(class='col')
-					label(for='uploaded') uploaded:
-						code(id='uploaded')
-				div(class='col')
-					label(for='expires') expires:
-						code(id='expires')
 
 			//- div(class='row')
 			//- 	div(class='col')
@@ -40,6 +65,6 @@ block content
 			//- 	div(class='col')
 			//- 		label(for='type') type:
 			//- 		code(id='type')
-			button(id='download', type="button", class='outline', value="Download") download
+			button(id='download', type="button", class='outline text-large border-sharp', value="Download") download
 
 	script(type='text/javascript', src='/public/js/download.js')
