@@ -76,7 +76,7 @@ func (c *FileController) Download(ctx iris.Context) {
 			large := "1"
 			ctx.ViewData("large", large)
 		} else {
-			json["img"] = "https://gobox.emawa.io/public/img/gobox/logo-4.png"
+			json["img"] = "https://gobox.emawa.io/public/img/gobox/logo-16.png"
 		}
 		json["title"] = "GoBox: " + json["name"]
 
