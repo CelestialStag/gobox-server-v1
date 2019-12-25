@@ -4,7 +4,7 @@ block content
 	
 	//- #[br]
 	span(class='hidden-mobile') #[h4 drag & drop files to upload]
-	h6 max 1GB upload
+	h6(class='color-grey') max 1GB upload
 
 	code(id="file-label") no file selected
 	form(id='form', action="/api/file/upload", enctype="multipart/form-data", method="POST")
