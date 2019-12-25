@@ -1,8 +1,8 @@
 $("document").ready(function(){
 	document.cookie = "username=John Doe";
 	
-	let dark = 'https://cdn.jsdelivr.net/npm/ashleycss@4.1.51/dist/themes/ashleycss-dark.min.css';
-	let light = 'https://cdn.jsdelivr.net/npm/ashleycss@4.1.2/dist/ashleycss-sakura.min.css';
+	let dark = 'https://cdn.jsdelivr.net/npm/ashleycss@4.1.52/dist/themes/ashleycss-dark.min.css';
+	let light = 'https://cdn.jsdelivr.net/npm/ashleycss@4.1.52/dist/themes/ashleycss-sakura.min.css';
 
 	let theme = Cookies.get('theme');
 
