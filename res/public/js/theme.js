@@ -8,15 +8,13 @@ $("document").ready(function(){
 
 	if(theme ==  'dark')
 	{
-		Cookies.set('theme', 'dark');
 		$('#style').attr('href', dark);
-		$('#theme').html("lights off!")
+		$('#theme').html("lights on!")
 	}
 	else
 	{
-		Cookies.set('theme', 'light');
 		$('#style').attr('href', light);
-		$('#theme').html("lights on!")
+		$('#theme').html("lights off!")
 	}
 
 	$('#theme').on('click', (e) => {
