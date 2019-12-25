@@ -3,23 +3,23 @@ extends res/view/_partial/layout.pug
 block content
 	
 	//- #[br]
-	h5(class="text-shadow").
-		drag & drop files to upload
-		#[h6 max 1GB upload]
+	span(class='hidden-mobile') #[h4 drag & drop files to upload]
+	h6 max 1GB upload
 
 	code(id="file-label") no file selected
 	form(id='form', action="/api/file/upload", enctype="multipart/form-data", method="POST")
 
-		label(id="file-input-label", class='file-input text-large border-sharp')
-			input(type="file", id='file-input', name="file", class="text-large") select
-		//- | &nbsp;
-		input(type="submit", class='outline text-large text-shadow border-sharp', id='submit', value='upload')
-		input(type="hidden", id="file-data", name="token", value=.token)
+		p
+			label(id="file-input-label", class='file-input text-large border-sharp')
+				input(type="file", id='file-input', name="file", class="text-large") select
+			| &nbsp;
+			input(type="submit", class='outline text-large border-sharp', id='submit', value='upload')
+			input(type="hidden", id="file-data", name="token", value=.token)
 	br
 	
 	// template for file link
 	div(class='section display-hidden' id="link-c")
-		input(type="text", id="link", value='Your file link will appear here', style='border: none;', class='text-center grey-light text-cerulean', readonly)
+		input(type="text", id="link", value='Your file link will appear here', class='full-width', style='border: none;', class='text-center grey-light text-cerulean', readonly)
 	
 	div(id='progress-container', class='section text-left')
 		ul(id='progress-list' file='' class='')

@@ -7,7 +7,7 @@ doctype html
 html
 	head
 		meta(name='viewport', content='width=device-width')
-		meta(name='theme-color', content='#fff1d0')
+		meta(name='theme-color', content='#f3eef0')
 		link(rel='shortcut icon', type='image/x-icon' href='/favicon.ico')
 		
 		if(.data)
@@ -46,7 +46,7 @@ html
 			meta(name="title", content="GoBox", id="title")
 			meta(name="description", content="Free, private and high speed file hosting from gobox.dev", id="desc")
 
-			link(rel="manifest", href="https://gobox.emawa.io/public/manifest.json")
+			link(rel="manifest", href="/manifest.json")
 
 			//- Open Graph / Facebook
 			meta(name="og:type", content="website")
@@ -65,15 +65,21 @@ html
 			link(rel="apple-touch-icon", href="https://gobox.emawa.io/public/img/gobox/logo-15.png", id="ap-img")
 
 		//- local assets
+		script(type='text/javascript', src='https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js')
 		script(type='text/javascript', src='/public/js/jquery-3.4.1.min.js')
 		script(type='text/javascript', src='/public/js/drag_drop_upload.js')
+		script(type='text/javascript', src='/public/js/theme.js')
 		
 		link(rel='stylesheet', type='text/css', href='/public/css/style.css')
 		//- link(rel='stylesheet', type='text/css', href='/public/css/ashleycss-dark.min.css')
 		link(rel='shortcut icon', type='x-icon' href='/public/favicon.ico')
 
 		//- ashleycss
-		link(rel='stylesheet', type='text/css', href='https://unpkg.com/ashleycss@3.4.0')
+		//- link(rel='stylesheet', type='text/css', href='https://cdn.jsdelivr.net/npm/ashleycss@4.1.2/dist/ashleycss-sakura.min.css')
+		//- link(rel='stylesheet', type='text/css', href='https://cdn.jsdelivr.net/npm/ashleycss@4.1.2/dist/ashleycss-royal.min.css')
+		link(rel='stylesheet', type='text/css', href='https://cdn.jsdelivr.net/npm/ashleycss@4.1.2/dist/ashleycss-sakura.min.css')
+		link(id='style', rel='stylesheet', type='text/css', href='https://cdn.jsdelivr.net/npm/ashleycss@4.1.2/dist/ashleycss-dark.min.css')
+		//- link(rel='stylesheet', type='text/css', href='https://unpkg.com/ashleycss@4.1.1')
 		
 		//- Font Awesome
 		link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.4.1/css/all.css',
@@ -88,9 +94,8 @@ html
 
 			gtag('config', 'G-6E47Z8R37P');
 
-	body(class='bg-cream flex-align-center flex-direction-vertical center')
-
-		a(href='/' id="logo") #[img(src="/public/img/gobox/logo-1.png", class="")]
+	body(class='center')
+		a(href='/' id="logo", class="") #[img(src="/public/img/gobox/logo-1.png", class="")]
 		div(id="mast", class='container text-center')
 			//- a(href='/') #[h1(class='color-orange') GoBox] #[img(src="/public/img/gobox/logo-1.png", id='')]
 
@@ -103,3 +108,4 @@ html
 			|#[i(class="fas fa-sm fa-heart color-red")]
 			|&nbsp;
 			| from Elias Mawa
+		small #[a(href='javascript:(0)', id='theme') lights off!]
