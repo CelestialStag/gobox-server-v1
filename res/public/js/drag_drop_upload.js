@@ -100,7 +100,7 @@ $("document").ready(function(){
 		var name = document.getElementById('file-input');
 		var file = name.files.item(0);
 		if(file != null) {
-			$("#file-label").html("loaded: "+file.name);
+			$("#file-label").html(file.name);
 		} else {
 			$("#file-label").html("no file selected");
 		}
