@@ -80,7 +80,7 @@ func (c *FileController) Download(ctx iris.Context) {
 		}
 		json["title"] = "GoBox: " + json["name"]
 
-		json["description"] = "Download <b>" + json["name"] + "</b>. Get more free and high speed file hosting at https://gobox.dev"
+		json["description"] = "Download <b>" + json["name"] + "</b>. More Free File Hosting @ https://GoBox.dev"
 
 		// ctx.JSON(json)
 
