@@ -37,7 +37,7 @@ $("document").ready(function(){
 				// $('#ap-img').attr("content", '/api/file/download/'+json.url);
 			}
 
-			if(json.type.includes("webm") || json.type.includes("mp4") || json.type.includes("mkv") || json.type.includes("x-matroska") || json.type.includes("video/ogv") || json.type.includes("ogg")){
+			if(json.type.includes("webm") || json.type.includes("mp4") || json.type.includes("mkv") || json.type.includes("x-matroska") || json.type.includes("video/ogv") || json.type.includes("quicktime") || json.type.includes("ogg")){
 				$('#preview-video').attr('src', '/api/file/download/'+json.url)
 				$('#preview-video').addClass("active");
 

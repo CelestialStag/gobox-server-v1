@@ -21,13 +21,13 @@ $("document").ready(function(){
 
 		if(theme ==  'dark')
 		{
-			Cookies.set('theme', 'light');
+			Cookies.set('theme', 'light', { expires: 365*3 });
 			$('#style').attr('href', light);
 			$('#theme').html("lights off!")
 		}
 		else
 		{
-			Cookies.set('theme', 'dark');
+			Cookies.set('theme', 'dark', { expires: 365*3 });
 			$('#style').attr('href', dark);
 			$('#theme').html("lights on!")
 		}
