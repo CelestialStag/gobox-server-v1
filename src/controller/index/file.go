@@ -80,12 +80,13 @@ func (c *FileController) Download(ctx iris.Context) {
 		}
 		json["title"] = "GoBox: " + json["name"]
 
-		json["description"] = "Download <b>" + json["name"] + "</b>. More Free File Hosting @ https://GoBox.dev"
+		json["description"] = "Download <b>" + json["name"] + "</b>.<br> Private File Hosting @ https://www.gobox.dev"
 
 		// ctx.JSON(json)
 
 	} else {
 		json["name"] = "file does not exist"
+		json["description"] = "file does not exist"
 		ctx.StatusCode(400)
 	}
 	id := ctx.Params().GetString("id")
