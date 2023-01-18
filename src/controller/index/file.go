@@ -78,9 +78,9 @@ func (c *FileController) Download(ctx iris.Context) {
 		} else {
 			json["img"] = "https://gobox.emawa.io/public/img/gobox/logo-15.png"
 		}
-		json["title"] = "GoBox: " + json["name"]
+		json["title"] = json["name"]
 
-		json["description"] = "Download <b>" + json["name"] + "</b>.<br> Private File Hosting @ https://www.gobox.dev"
+		json["description"] = "Download: " + json["name"] + "\n GoBox file hosting: https://www.gobox.dev"
 
 		// ctx.JSON(json)
 
