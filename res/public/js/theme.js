@@ -4,11 +4,7 @@ $("document").ready(function () {
 
   let theme = Cookies.get("theme");
 
-  if (theme == undefined) {
-    Cookies.set("theme", "dark", { expires: 365 * 3 });
-    $("#style").attr("href", dark);
-    $("#theme").html("lights on!");
-  }
+  if (!theme) Cookies.set("theme", "dark", { expires: 365 });
 
   if (theme == "dark") {
     $("#style").attr("href", dark);
@@ -18,16 +14,14 @@ $("document").ready(function () {
     $("#theme").html("lights off!");
   }
 
-  $("#theme").on("click", (e) => {
-    e.target.value = "qq";
+  $("#theme").on("click", () => {
     let theme = Cookies.get("theme");
-
     if (theme == "dark") {
-      Cookies.set("theme", "light", { expires: 365 * 3 });
+      Cookies.set("theme", "light", { expires: 365 });
       $("#style").attr("href", light);
       $("#theme").html("lights off!");
     } else {
-      Cookies.set("theme", "dark", { expires: 365 * 3 });
+      Cookies.set("theme", "dark", { expires: 365 });
       $("#style").attr("href", dark);
       $("#theme").html("lights on!");
     }
