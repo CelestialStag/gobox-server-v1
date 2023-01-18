@@ -16,8 +16,7 @@ $("document").ready(function () {
 
   $("#theme").on("click", () => {
     const current_theme = Cookies.get("theme");
-
-    if (current_theme === undefined || persisted_theme === "dark") {
+    if (current_theme === undefined || current_theme === "dark") {
       Cookies.set("theme", "light", { expires: 365 });
       $("#style").attr("href", light);
       $("#theme").html("lights off!");
