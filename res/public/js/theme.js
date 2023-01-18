@@ -1,12 +1,11 @@
 $("document").ready(function () {
   let dark = "https://cdn.jsdelivr.net/npm/ashleycss@4.1.52/dist/themes/ashleycss-dark.min.css";
+  // let light = "https://cdn.jsdelivr.net/npm/ashleycss@4.1.52/dist/themes/ashleycss-sleepy.min.css";
   let light = "https://cdn.jsdelivr.net/npm/ashleycss@4.1.52/dist/themes/ashleycss-sakura.min.css";
 
   let theme = Cookies.get("theme");
 
-  if (!theme) Cookies.set("theme", "dark", { expires: 365 });
-
-  if (theme == "dark") {
+  if (!theme || theme == "dark") {
     $("#style").attr("href", dark);
     $("#theme").html("lights on!");
   } else {
