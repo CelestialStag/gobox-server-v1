@@ -1,8 +1,9 @@
 apps:
   - interpreter: bash
     name: gobox-client
-    script: ./scripts/start.sh
-    exec_mode: cluster
-    instances: 2
+    script: ./start.sh
+    exec_mode: fork_mode
+    # exec_mode: cluster
+    # instances: 2
     watch: true
     ignore_watch: ["data/", "node_modules/"]
