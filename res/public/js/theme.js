@@ -1,35 +1,35 @@
-$("document").ready(function(){
-	let dark = 'https://cdn.jsdelivr.net/npm/ashleycss@4.1.52/dist/themes/ashleycss-dark.min.css';
-	let light = 'https://cdn.jsdelivr.net/npm/ashleycss@4.1.52/dist/themes/ashleycss-sakura.min.css';
+$("document").ready(function () {
+  let dark = "https://cdn.jsdelivr.net/npm/ashleycss@4.1.52/dist/themes/ashleycss-dark.min.css";
+  let light = "https://cdn.jsdelivr.net/npm/ashleycss@4.1.52/dist/themes/ashleycss-sakura.min.css";
 
-	let theme = Cookies.get('theme');
+  let theme = Cookies.get("theme");
 
-	if(theme ==  'dark')
-	{
-		$('#style').attr('href', dark);
-		$('#theme').html("lights on!")
-	}
-	else
-	{
-		$('#style').attr('href', light);
-		$('#theme').html("lights off!")
-	}
+  if (theme == undefined) {
+    Cookies.set("theme", "dark", { expires: 365 * 3 });
+    $("#style").attr("href", dark);
+    $("#theme").html("lights on!");
+  }
 
-	$('#theme').on('click', (e) => {
-		e.target.value = 'qq';
-		let theme = Cookies.get('theme');
+  if (theme == "dark") {
+    $("#style").attr("href", dark);
+    $("#theme").html("lights on!");
+  } else {
+    $("#style").attr("href", light);
+    $("#theme").html("lights off!");
+  }
 
-		if(theme ==  'dark')
-		{
-			Cookies.set('theme', 'light', { expires: 365*3 });
-			$('#style').attr('href', light);
-			$('#theme').html("lights off!")
-		}
-		else
-		{
-			Cookies.set('theme', 'dark', { expires: 365*3 });
-			$('#style').attr('href', dark);
-			$('#theme').html("lights on!")
-		}
-	});
+  $("#theme").on("click", (e) => {
+    e.target.value = "qq";
+    let theme = Cookies.get("theme");
+
+    if (theme == "dark") {
+      Cookies.set("theme", "light", { expires: 365 * 3 });
+      $("#style").attr("href", light);
+      $("#theme").html("lights off!");
+    } else {
+      Cookies.set("theme", "dark", { expires: 365 * 3 });
+      $("#style").attr("href", dark);
+      $("#theme").html("lights on!");
+    }
+  });
 });
